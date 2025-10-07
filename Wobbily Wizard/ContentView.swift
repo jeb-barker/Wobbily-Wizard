@@ -7,26 +7,39 @@
 
 import SwiftUI
 
+
+enum Screen {
+    case home
+    case cauldron
+    case friends
+}
+
 struct ContentView: View {
+    @State private var currentView : Screen = .home
+    
     var body: some View {
         NavigationStack {
-                VStack {
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+            VStack {
+                switch currentView {
+                case .home:
+                    Home()
+                case .cauldron:
+                    Cauldren()
+                case .friends:
+                    Text("friends")
                 }
+            }
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
-                        Button(action: {}) {
+                        Button(action: {currentView = .home}) {
                             Label("Home", systemImage: "house")
                         }
                         Spacer()
-                        Button(action: {}) {
+                        Button(action: {currentView = .cauldron}) {
                             Label("Search", systemImage: "magnifyingglass")
                         }
                         Spacer()
-                        Button(action: {}) {
+                        Button(action: {currentView = .friends}) {
                             Label("Profile", systemImage: "person.circle")
                         }
                     }
