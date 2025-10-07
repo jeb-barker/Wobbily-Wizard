@@ -12,6 +12,7 @@ struct Wobbily_WizardApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            Cauldren()
         }
     }
 }

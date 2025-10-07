@@ -18,6 +18,11 @@ struct ContentView: View {
         .padding()
     }
 }
+struct Cauldren: View {
+    var body: some View {
+        Text("Hello, Cauldren!")
+    }
+}
 
 #Preview {
     ContentView()
