@@ -11,7 +11,7 @@
 		8D048A402E959705004CC42A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A3F2E959705004CC42A /* ContentView.swift */; };
 		8D048A422E959706004CC42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A412E959706004CC42A /* Assets.xcassets */; };
 		8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A442E959706004CC42A /* Preview Assets.xcassets */; };
-		8D048A4C2E9597BF004CC42A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A4B2E9597BF004CC42A /* .gitignore */; };
+		8D048A512E959FD4004CC42A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A502E959FD4004CC42A /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +20,7 @@
 		8D048A3F2E959705004CC42A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8D048A412E959706004CC42A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D048A442E959706004CC42A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8D048A4B2E9597BF004CC42A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8D048A502E959FD4004CC42A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 		8D048A3C2E959705004CC42A /* Wobbily Wizard */ = {
 			isa = PBXGroup;
 			children = (
-				8D048A4B2E9597BF004CC42A /* .gitignore */,
+				8D048A4F2E959FB8004CC42A /* Views */,
 				8D048A3D2E959705004CC42A /* Wobbily_WizardApp.swift */,
 				8D048A3F2E959705004CC42A /* ContentView.swift */,
 				8D048A412E959706004CC42A /* Assets.xcassets */,
@@ -68,6 +68,14 @@
 				8D048A442E959706004CC42A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8D048A4F2E959FB8004CC42A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8D048A502E959FD4004CC42A /* Home.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */,
-				8D048A4C2E9597BF004CC42A /* .gitignore in Resources */,
 				8D048A422E959706004CC42A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D048A402E959705004CC42A /* ContentView.swift in Sources */,
+				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				8D048A3E2E959705004CC42A /* Wobbily_WizardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
