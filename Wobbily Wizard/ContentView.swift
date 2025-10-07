@@ -9,13 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        NavigationStack {
+                VStack {
+                    Image(systemName: "globe")
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                    Text("Hello, world!")
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {}) {
+                            Label("Home", systemImage: "house")
+                        }
+                        Spacer()
+                        Button(action: {}) {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
+                        Spacer()
+                        Button(action: {}) {
+                            Label("Profile", systemImage: "person.circle")
+                        }
+                    }
+                }
+            }
     }
 }
 struct Cauldren: View {
