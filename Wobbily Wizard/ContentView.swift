@@ -39,6 +39,11 @@ struct Cauldren: View {
         Text("Hello, Cauldren!")
     }
 }
+struct Shop: View {
+    var body: some View {
+        Text("Hello. Shop!")
+    }
+}
 
 #Preview {
     ContentView()
