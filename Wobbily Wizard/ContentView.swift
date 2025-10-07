@@ -20,31 +20,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                switch currentView {
-                case .home:
-                    Home()
-                case .cauldron:
-                    Cauldren()
-                case .friends:
-                    Text("friends")
-                }
-            }
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button(action: {currentView = .home}) {
-                            Label("Home", systemImage: "house")
-                        }
-                        Spacer()
-                        Button(action: {currentView = .cauldron}) {
-                            Label("Search", systemImage: "magnifyingglass")
-                        }
-                        Spacer()
-                        Button(action: {currentView = .friends}) {
-                            Label("Profile", systemImage: "person.circle")
-                        }
+                TabView() {
+                    Home().tabItem() {
+                        Label("Home", systemImage: "house.fill")
+                    }
+                    Cauldren().tabItem {
+                        Label("Cauldron", systemImage: "wand.and.stars")
                     }
                 }
             }
+            
+            
+        }
     }
 }
 struct Cauldren: View {
