@@ -36,7 +36,18 @@ struct ContentView: View {
 }
 struct Cauldren: View {
     var body: some View {
-        Text("Hello, Cauldren!")
+        VStack{
+            Spacer()
+            Image("Item_shelves")
+                .resizable()
+                .scaledToFit()
+            Spacer()
+            Image("cauldren-1")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+        }
+        
     }
 }
 struct Shop: View {
