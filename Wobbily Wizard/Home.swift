@@ -124,6 +124,7 @@ enum StepCounterError: Error {
     case couldNotFetchHealthStore
 }
 
+// View Model Representing the amount of steps taken
 final class StepCountViewModel: ObservableObject {
 
     @Published var healthStore: HKHealthStore?
@@ -157,10 +158,10 @@ final class StepCountViewModel: ObservableObject {
         // make sure healthStore is initialized
         guard let healthStore else { return }
 
-        let startDate = startTime
+        let startDate = startTime.addingTimeInterval(TimeInterval(-1))
         let healthStepType = HKQuantityType(.stepCount)
         // Sample between the last time that this function was called and now.
-        let sampleDateRange = HKQuery.predicateForSamples(withStart: startDate, end: Date.now)
+        let sampleDateRange = HKQuery.predicateForSamples(withStart: startDate, end: Date.now.zeroSeconds?.addingTimeInterval(TimeInterval(60)))
         // build the argument that the query expects
         let sample = HKSamplePredicate.quantitySample(type: healthStepType, predicate: sampleDateRange)
         
@@ -169,16 +170,17 @@ final class StepCountViewModel: ObservableObject {
         let stepsData = try await stepsQuery.result(for: healthStore)
         
         // sum the number of steps in each time period and store in the published steps variable
-        stepsData.enumerateStatistics(from: startDate.zeroSeconds ?? Date.now, to: Date.now) {
+        stepsData.enumerateStatistics(from: startDate.zeroSeconds?.addingTimeInterval(TimeInterval(-1)) ?? Date.now, to: Date.now.zeroSeconds?.addingTimeInterval(TimeInterval(60)) ?? Date.now) {
             statistics, pointer in
             let stepCount = statistics.sumQuantity()?.doubleValue(for: .count())
             DispatchQueue.main.async {
                 if let stepCount, stepCount > 0 {
-                    self.steps = stepCount
+                    self.steps += stepCount
+                    self.startTime = Date.now.zeroSeconds?.addingTimeInterval(TimeInterval(60)) ?? Date.now.zeroSeconds!
+                    print("\(stepCount) from \(startDate.zeroSeconds!.addingTimeInterval(TimeInterval(-1))) to \(Date.now.zeroSeconds!.addingTimeInterval(TimeInterval(60)))")
                 }
             }
         }
-        print(self.steps)
     }
 }
 
