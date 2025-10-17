@@ -41,7 +41,6 @@ struct Cauldren: View {
 
     var body: some View {
         VStack {
-            
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
                 ForEach(items, id: \.self) { item in
                     Text(item)
