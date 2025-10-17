@@ -130,19 +130,21 @@ struct Friends: View{
         let id2 = UUID()
         let id3 = UUID()
         let arr = [id1, id2, id3]
-        Text("Friends List")
         VStack{
+            Text("Friends List")
             ForEach(arr, id: \.self){ userId in
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(.black)
+                        .fill(.red)
                         .frame(width: UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
-                    Text("Nickname")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .padding()
-                    Text(userId.uuidString)
-                        .font(.caption)
+                    VStack{
+                        Text("Nickname")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .padding()
+                        Text(userId.uuidString)
+                            .font(.caption)
+                    }
                 }
                     
             }
