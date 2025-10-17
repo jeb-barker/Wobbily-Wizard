@@ -119,33 +119,33 @@ struct Shop: View {
         Text("Hello. Shop!")
     }
 }
-//struct Friends: View{
-//    var body: some View{
-//        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
-//        var id1 = UUID()
-//        var id2 = UUID()
-//        var id3 = UUID()
-//        var arr = [id1, id2, id3]
-//        Text("Friends List")
-//        VStack{
-//            arr.forEach{ userId in
-//                ZStack{
-//                    RoundedRectangle(cornerRadius: 25)
-//                        .fill(.black)
-//                        .frame(width:UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
-//                    Text("Nickname")
-//                        .font(.title)
-//                        .fontWeight(.semibold)
-//                        .padding()
-//                    Text(userId)
-//                        .font(.caption)
-//                }
-//                
-//            }
-//        }
-//        
-//    }}
-
+struct Friends: View{
+    var body: some View{
+        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
+        var id1 = UUID()
+        var id2 = UUID()
+        var id3 = UUID()
+        var arr = [id1, id2, id3]
+        Text("Friends List")
+        VStack{
+            ForEach(arr, id: \.self){ userId in
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(.black)
+                        .frame(width: UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
+                    Text("Nickname")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .padding()
+                    Text(userId.uuidString)
+                        .font(.caption)
+                }
+                    
+            }
+        }
+        
+    }
+}
 #Preview {
     ContentView()
 }
