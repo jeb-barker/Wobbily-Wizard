@@ -122,10 +122,10 @@ struct Shop: View {
 struct Friends: View{
     var body: some View{
         //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
-        var id1 = UUID()
-        var id2 = UUID()
-        var id3 = UUID()
-        var arr = [id1, id2, id3]
+        let id1 = UUID()
+        let id2 = UUID()
+        let id3 = UUID()
+        let arr = [id1, id2, id3]
         Text("Friends List")
         VStack{
             ForEach(arr, id: \.self){ userId in
