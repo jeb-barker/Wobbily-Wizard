@@ -56,6 +56,10 @@ struct ContentView: View {
                     Cauldren().tabItem {
                         Label("Cauldron", systemImage: "wand.and.stars")
                     }
+                    Friends().tabItem(){
+                        Label("Friends", systemImage: "person.2")
+                    }
+
                 }
             }
             
