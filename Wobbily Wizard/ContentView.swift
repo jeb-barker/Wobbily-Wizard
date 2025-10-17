@@ -100,24 +100,24 @@ struct Friends: View{
         var arr = [id1, id2, id3]
         Text("Friends List")
         VStack{
-            arr.forEach{ userId in
+            ForEach(arr, id: \.self){ userId in
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
                         .fill(.black)
-                        .frame(width:UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
+                        .frame(width: UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
                     Text("Nickname")
                         .font(.title)
                         .fontWeight(.semibold)
                         .padding()
-                    Text(userId)
+                    Text(userId.uuidString)
                         .font(.caption)
                 }
-                   
+                    
             }
         }
-       
+        
     }
-
+}
 #Preview {
     ContentView()
 }
