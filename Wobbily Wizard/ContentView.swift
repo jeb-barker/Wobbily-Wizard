@@ -6,18 +6,43 @@
 //
 
 import SwiftUI
+extension UIDevice {
+    static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
+}
+class CustomWindow: UIWindow {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+            guard motion == .motionShake else { return }
+            NotificationCenter.default.post(name: UIDevice.deviceDidShake, object: nil)
+    }
+}
 
 extension UIScreen{
    static let screenWidth = UIScreen.main.bounds.size.width
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
 }
+extension View {
+    public func onShakeGesture(perform action: @escaping () -> Void) -> some View {
+        self.modifier(ShakeGestureViewModifier(action: action))
+    }
+}
 enum Screen {
     case home
     case cauldron
     case friends
 }
-
+struct ShakeGestureViewModifier: ViewModifier {
+  // 1
+  let action: () -> Void
+  
+  func body(content: Content) -> some View {
+    content
+      // 2
+      .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
+        action()
+      }
+  }
+}
 struct ContentView: View {
     @State private var currentView : Screen = .home
     
@@ -42,7 +67,6 @@ struct Cauldren: View {
     @State private var droppedItems: [String] = []
 
     let items = ["🍎", "🌿", "💎", "🐍", "🍔", "🍕", "🍜", "🌮", "🍣", "🥗", "💀", "🧪", "⛧", "🖤", "🕯️", "⚗️"]
-
     var body: some View {
         VStack {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
@@ -82,6 +106,10 @@ struct Cauldren: View {
             // Show what’s been dropped
             Text("Dropped: \(droppedItems.joined(separator: ", "))")
                 .padding(.top, 20)
+            Text("")
+                .onShakeGesture{
+                    print("Device is shaking!")
+                }
         }
         .padding()
     }
@@ -91,32 +119,32 @@ struct Shop: View {
         Text("Hello. Shop!")
     }
 }
-struct Friends: View{
-    var body: some View{
-        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
-        var id1 = UUID()
-        var id2 = UUID()
-        var id3 = UUID()
-        var arr = [id1, id2, id3]
-        Text("Friends List")
-        VStack{
-            arr.forEach{ userId in
-                ZStack{
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(.black)
-                        .frame(width:UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
-                    Text("Nickname")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .padding()
-                    Text(userId)
-                        .font(.caption)
-                }
-                   
-            }
-        }
-       
-    }
+//struct Friends: View{
+//    var body: some View{
+//        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
+//        var id1 = UUID()
+//        var id2 = UUID()
+//        var id3 = UUID()
+//        var arr = [id1, id2, id3]
+//        Text("Friends List")
+//        VStack{
+//            arr.forEach{ userId in
+//                ZStack{
+//                    RoundedRectangle(cornerRadius: 25)
+//                        .fill(.black)
+//                        .frame(width:UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
+//                    Text("Nickname")
+//                        .font(.title)
+//                        .fontWeight(.semibold)
+//                        .padding()
+//                    Text(userId)
+//                        .font(.caption)
+//                }
+//                
+//            }
+//        }
+//        
+//    }}
 
 #Preview {
     ContentView()
