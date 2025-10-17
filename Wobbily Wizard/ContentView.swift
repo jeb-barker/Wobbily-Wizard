@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
+}
 enum Screen {
     case home
     case cauldron
@@ -87,6 +91,32 @@ struct Shop: View {
         Text("Hello. Shop!")
     }
 }
+struct Friends: View{
+    var body: some View{
+        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
+        var id1 = UUID()
+        var id2 = UUID()
+        var id3 = UUID()
+        var arr = [id1, id2, id3]
+        Text("Friends List")
+        VStack{
+            arr.forEach{ userId in
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(.black)
+                        .frame(width:UIScreen.screenWidth * 0.85, height: UIScreen.screenHeight * 0.13, alignment: .center)
+                    Text("Nickname")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .padding()
+                    Text(userId)
+                        .font(.caption)
+                }
+                   
+            }
+        }
+       
+    }
 
 #Preview {
     ContentView()
