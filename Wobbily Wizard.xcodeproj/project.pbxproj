@@ -12,6 +12,7 @@
 		8D048A422E959706004CC42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A412E959706004CC42A /* Assets.xcassets */; };
 		8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A442E959706004CC42A /* Preview Assets.xcassets */; };
 		8D048A512E959FD4004CC42A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A502E959FD4004CC42A /* Home.swift */; };
+		8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		8D048A502E959FD4004CC42A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		8D048A522E983FA6004CC42A /* Wobbily Wizard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wobbily Wizard.entitlements"; sourceTree = "<group>"; };
 		8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Wobbily-Wizard-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCountViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				8D048A3F2E959705004CC42A /* ContentView.swift */,
 				8D048A412E959706004CC42A /* Assets.xcassets */,
 				8D048A432E959706004CC42A /* Preview Content */,
+				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
 			);
 			path = "Wobbily Wizard";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */,
 				8D048A402E959705004CC42A /* ContentView.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				8D048A3E2E959705004CC42A /* Wobbily_WizardApp.swift in Sources */,
