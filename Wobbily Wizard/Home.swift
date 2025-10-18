@@ -19,11 +19,10 @@ struct Home: View {
             LinearProgressView().frame(alignment: .top).environmentObject(stepCountModel).task {
                 
             }
-            Text("Steps: \(Int(stepCountModel.steps))")
+            Text("Steps: \(Int(stepCountModel.steps))") //TODO: add pedometer steps to this.
             Spacer()
             CircleRotation().frame(alignment: .bottom)
         }.task {
-            //stepCountModel.startPedometerUpdates()
             await stepCountModel.requestAuth()
             //start counting steps
             stepCountModel.fetchStepsInterval()
@@ -33,7 +32,7 @@ struct Home: View {
 }
 
 
-
+//temporary rotating globe. I would like to replace this with an image that we draw
 struct CircleRotation: View {
     @State private var degrees: Double = 0;
 
@@ -86,7 +85,7 @@ struct PurplePotionProgressViewStyle: ProgressViewStyle {
                     .frame(width: CGFloat(configuration.fractionCompleted ?? 0) * totalWidth, height: barHeight)
                     .foregroundColor(.purple)
                 //Label / Popup
-                Text("\(stepCountModel.latestSteps)").foregroundStyle(.opacity(0.5))
+                Text("+\(stepCountModel.latestSteps)").foregroundStyle(.opacity(0.5))
                     .position(CGPoint(x: geometry.size.width/2, y: barHeight/2))
             }.frame(height: barHeight) // have to limit height bc GeometryReader takes up all available space
         }

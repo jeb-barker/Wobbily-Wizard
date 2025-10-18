@@ -67,7 +67,7 @@ final class StepCountViewModel: ObservableObject {
         let endDate = Date.now.zeroSeconds!
         
         //debug
-        print("getting steps from \(startDate) to \(endDate)")
+        //print("getting steps from \(startDate) to \(endDate)")
         
         // only query for stepcount
         let healthStepType = HKQuantityType(.stepCount)
@@ -88,6 +88,10 @@ final class StepCountViewModel: ObservableObject {
             let stepCount = statistics.sumQuantity()?.doubleValue(for: .count())
             if let stepCount, stepCount > 0 {
                 cumulativeStepsHealthKit += stepCount
+                DispatchQueue.main.async {
+                    //set the latestSteps
+                    self.latestSteps = Int(stepCount)
+                }
             }
             
         }
@@ -96,7 +100,7 @@ final class StepCountViewModel: ObservableObject {
         let capturedSteps = cumulativeStepsHealthKit
         DispatchQueue.main.async {
             self.steps = capturedSteps
-            print("\(capturedSteps) total \(startDate) to \(endDate)")
+            print("\(capturedSteps) steps \(startDate) to \(endDate)")
             self.stepEvent(capturedSteps, 0.0, self.pedometerSteps)
         }
     }
@@ -118,12 +122,10 @@ final class StepCountViewModel: ObservableObject {
     
     // dispatch event when steps are added
     func stepEvent(_ prevSteps : Double, _ newSteps : Double, _ pedSteps : Double) {
-        print("\(prevSteps) \(newSteps) + \(pedSteps)")
         if prevSteps > 0 || pedSteps > 0 {
-            self.latestSteps = Int(newSteps)
             if self.steps + pedSteps >= self.stepGoal {
                 //we made it to the step goal...
-                print("reset to 0 / \(stepGoal * 1.2)")
+                print("reset steps / goal to 0 / \(stepGoal * 1.2)")
                 self.startTime = Date.now.zeroSeconds!.addingTimeInterval(TimeInterval(60))
                 self.steps = 0
                 self.pedometerSteps = 0
