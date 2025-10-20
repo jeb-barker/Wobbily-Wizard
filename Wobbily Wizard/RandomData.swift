@@ -1,0 +1,1 @@
+import Foundationstruct RandomData {    static let numbers: [Int] = {        print("Initialized static array once")        return (0..<10).map { _ in Int.random(in: 1..<100) }    }()}
