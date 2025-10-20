@@ -59,6 +59,9 @@ struct ContentView: View {
                     Friends().tabItem(){
                         Label("Friends", systemImage: "person.2")
                     }
+                    Shop().tabItem() {
+                        Label("Shop", systemImage: "cart.fill")
+                    }
 
                 }
             }
@@ -116,11 +119,6 @@ struct Cauldren: View {
                 }
         }
         .padding()
-    }
-}
-struct Shop: View {
-    var body: some View {
-        Text("Hello. Shop!")
     }
 }
 struct Friends: View{
