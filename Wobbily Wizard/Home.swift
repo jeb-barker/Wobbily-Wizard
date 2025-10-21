@@ -19,7 +19,7 @@ struct Home: View {
             LinearProgressView().frame(alignment: .top).environmentObject(stepCountModel).task {
                 
             }
-            Text("Steps: \(Int(stepCountModel.steps))") //TODO: add pedometer steps to this.
+            Text("Steps: \(Int(stepCountModel.steps)) + \(Int(stepCountModel.pedometerSteps))")
             Spacer()
             CircleRotation().frame(alignment: .bottom)
         }.task {
