@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D048A3E2E959705004CC42A /* Wobbily_WizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A3D2E959705004CC42A /* Wobbily_WizardApp.swift */; };
+		3E0597CC2EA6AE7F004C3169 /* RandomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0597CB2EA6AE7F004C3169 /* RandomData.swift */; };
+		3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0597F72EA6BFE1004C3169 /* Wobbily_WizardApp.swift */; };
+		3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3070222EA32FB3005B4B33 /* Shop.swift */; };
 		8D048A402E959705004CC42A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A3F2E959705004CC42A /* ContentView.swift */; };
 		8D048A422E959706004CC42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A412E959706004CC42A /* Assets.xcassets */; };
 		8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A442E959706004CC42A /* Preview Assets.xcassets */; };
@@ -16,8 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E0597CB2EA6AE7F004C3169 /* RandomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomData.swift; sourceTree = "<group>"; };
+		3E0597F72EA6BFE1004C3169 /* Wobbily_WizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wobbily_WizardApp.swift; sourceTree = "<group>"; };
+		3E3070222EA32FB3005B4B33 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		8D048A3A2E959705004CC42A /* Wobbily Wizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wobbily Wizard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D048A3D2E959705004CC42A /* Wobbily_WizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wobbily_WizardApp.swift; sourceTree = "<group>"; };
 		8D048A3F2E959705004CC42A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8D048A412E959706004CC42A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D048A442E959706004CC42A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -57,11 +61,12 @@
 		8D048A3C2E959705004CC42A /* Wobbily Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				3E0597CB2EA6AE7F004C3169 /* RandomData.swift */,
 				8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */,
 				8D048A522E983FA6004CC42A /* Wobbily Wizard.entitlements */,
 				8D048A4F2E959FB8004CC42A /* Views */,
-				8D048A3D2E959705004CC42A /* Wobbily_WizardApp.swift */,
 				8D048A3F2E959705004CC42A /* ContentView.swift */,
+				3E0597F72EA6BFE1004C3169 /* Wobbily_WizardApp.swift */,
 				8D048A412E959706004CC42A /* Assets.xcassets */,
 				8D048A432E959706004CC42A /* Preview Content */,
 				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
@@ -80,6 +85,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3E3070222EA32FB3005B4B33 /* Shop.swift */,
 				8D048A502E959FD4004CC42A /* Home.swift */,
 			);
 			name = Views;
@@ -155,10 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0597CC2EA6AE7F004C3169 /* RandomData.swift in Sources */,
 				8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */,
 				8D048A402E959705004CC42A /* ContentView.swift in Sources */,
+				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
-				8D048A3E2E959705004CC42A /* Wobbily_WizardApp.swift in Sources */,
+				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = B974UN6V32;
+				DEVELOPMENT_TEAM = 324Y6D3P55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -310,7 +318,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobappdev.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ashley-kulcsar.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -327,7 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = B974UN6V32;
+				DEVELOPMENT_TEAM = 324Y6D3P55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -344,7 +352,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobappdev.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ashley-kulcsar.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

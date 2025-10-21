@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 extension UIDevice {
     static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
 }
@@ -45,6 +46,7 @@ struct ShakeGestureViewModifier: ViewModifier {
 }
 struct ContentView: View {
     @State private var currentView : Screen = .home
+    @StateObject var shopData = ShopData()
     
     var body: some View {
         NavigationStack {
@@ -58,6 +60,9 @@ struct ContentView: View {
                     }
                     Friends().tabItem(){
                         Label("Friends", systemImage: "person.2")
+                    }
+                    Shop().environmentObject(shopData).tabItem() {
+                        Label("Shop", systemImage: "cart.fill")
                     }
 
                 }
@@ -116,11 +121,6 @@ struct Cauldren: View {
                 }
         }
         .padding()
-    }
-}
-struct Shop: View {
-    var body: some View {
-        Text("Hello. Shop!")
     }
 }
 struct Friends: View{
