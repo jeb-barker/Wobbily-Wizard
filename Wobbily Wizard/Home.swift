@@ -8,26 +8,33 @@
 import SwiftUI
 import HealthKit
 import CoreMotion
+import SpriteKit
 
 struct Home: View {
     @State private var total : Double = 0.1
     @StateObject private var stepCountModel = StepCountViewModel();
     
     var body: some View {
-        VStack {
-            // set total equal to the percentage of steps taken towards the goal.
-            LinearProgressView().frame(alignment: .top).environmentObject(stepCountModel).task {
+        ZStack {
+            //Put the Background Image in:
+            Image("home_background").resizable().scaledToFill()
+            VStack {
                 
+                // set total equal to the percentage of steps taken towards the goal.
+                LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
+                Text("Steps: \(Int(stepCountModel.steps)) + \(Int(stepCountModel.pedometerSteps))").foregroundStyle(.white)
+                Spacer()
+                CircleRotation().frame(width: 150, height: 150, alignment: .center)
+                Spacer()
+            }.task {
+                await stepCountModel.requestAuth()
+                //start counting steps
+                stepCountModel.fetchStepsInterval()
             }
-            Text("Steps: \(Int(stepCountModel.steps)) + \(Int(stepCountModel.pedometerSteps))")
-            Spacer()
-            CircleRotation().frame(alignment: .bottom)
-        }.task {
-            await stepCountModel.requestAuth()
-            //start counting steps
-            stepCountModel.fetchStepsInterval()
+            .padding()
         }
-        .padding()
+        
+        
     }
 }
 
@@ -37,15 +44,22 @@ struct CircleRotation: View {
     @State private var degrees: Double = 0;
 
     var body: some View {
-        Image(systemName: "globe.americas")
-            .resizable()
-            .frame(width: 200, height: 200)
-            .foregroundColor(.blue)
-            .rotationEffect(Angle(degrees: degrees)) // Apply rotation effect
-            .animation(Animation.linear(duration: 15).repeatForever(autoreverses: false), value: degrees) // Apply animation
-            .onAppear {
-                degrees = 360
-            }
+        GeometryReader {
+            geometry in
+            // Display the player's walking animation
+            SpriteView(scene: PlayerWalkScene(), options: [.allowsTransparency]).ignoresSafeArea()
+            // Rotate the Globe Sprite
+            Image("home_globe")
+                        .resizable()
+                        .foregroundColor(.blue)
+                        .rotationEffect(Angle(degrees: -degrees)) // Apply rotation effect
+                        .animation(Animation.linear(duration: 150).repeatForever(autoreverses: false), value: degrees) // Apply animation
+                        .frame(width: 1000, height: 1000)
+                        .position(x:geometry.size.width/2, y:(geometry.size.height/2) + 570)
+                        .onAppear {
+                            degrees = 360
+                        }
+        }
     }
 }
 
@@ -61,7 +75,7 @@ struct LinearProgressView: View {
                     try?
                     await stepCountModel.fetchCumulativeSteps()
                 }
-            }
+            }.foregroundStyle(.white)
         }
     }
 }

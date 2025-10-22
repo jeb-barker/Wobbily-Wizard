@@ -55,6 +55,8 @@ struct ContentView: View {
                     Home().tabItem() {
                         Label("Home", systemImage: "house.fill")
                     }
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .toolbarBackground(Color.white, for: .tabBar)
                     Cauldren().tabItem {
                         Label("Cauldron", systemImage: "wand.and.stars")
                     }
@@ -64,8 +66,10 @@ struct ContentView: View {
                     Shop().environmentObject(shopData).tabItem() {
                         Label("Shop", systemImage: "cart.fill")
                     }
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .toolbarBackground(Color.white, for: .tabBar)
 
-                }
+                }.backgroundStyle(FillShapeStyle())
             }
             
             

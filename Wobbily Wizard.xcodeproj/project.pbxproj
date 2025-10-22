@@ -15,6 +15,7 @@
 		8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A442E959706004CC42A /* Preview Assets.xcassets */; };
 		8D048A512E959FD4004CC42A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A502E959FD4004CC42A /* Home.swift */; };
 		8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */; };
+		8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		8D048A522E983FA6004CC42A /* Wobbily Wizard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wobbily Wizard.entitlements"; sourceTree = "<group>"; };
 		8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Wobbily-Wizard-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCountViewModel.swift; sourceTree = "<group>"; };
+		8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWalkScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		8D048A3C2E959705004CC42A /* Wobbily Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				8D048A762EA819A5004CC42A /* Scenes */,
 				3E0597CB2EA6AE7F004C3169 /* RandomData.swift */,
 				8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */,
 				8D048A522E983FA6004CC42A /* Wobbily Wizard.entitlements */,
@@ -89,6 +92,14 @@
 				8D048A502E959FD4004CC42A /* Home.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		8D048A762EA819A5004CC42A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 				8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */,
 				8D048A402E959705004CC42A /* ContentView.swift in Sources */,
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
+				8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
 			);
