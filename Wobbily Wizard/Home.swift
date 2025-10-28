@@ -29,7 +29,7 @@ struct Home: View {
             }.task {
                 await stepCountModel.requestAuth()
                 //start counting steps
-                stepCountModel.fetchStepsInterval()
+                stepCountModel.startTimer()
             }
             .padding()
         }
@@ -72,8 +72,7 @@ struct LinearProgressView: View {
                 .progressViewStyle(PurplePotionProgressViewStyle()).environmentObject(stepCountModel)
             Button("More") {
                 Task{
-                    try?
-                    await stepCountModel.fetchCumulativeSteps()
+                    stepCountModel.startTimer()
                 }
             }.foregroundStyle(.white)
         }
