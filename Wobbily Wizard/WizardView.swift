@@ -44,7 +44,7 @@ struct ShakeGestureViewModifier: ViewModifier {
       }
   }
 }
-struct ContentView: View {
+struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var shopData = ShopData()
     
@@ -128,5 +128,5 @@ struct Cauldren: View {
     }
 }
 #Preview {
-    ContentView()
+    WizardView()
 }
