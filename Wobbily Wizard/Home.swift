@@ -24,6 +24,8 @@ struct Home: View {
                 LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
                 Text("Steps: \(Int(stepCountModel.steps)) + \(Int(stepCountModel.pedometerSteps))").foregroundStyle(.white)
                 Spacer()
+                
+                Spacer()
                 CircleRotation().frame(width: 150, height: 150, alignment: .center)
                 Spacer()
             }.task {
@@ -39,7 +41,7 @@ struct Home: View {
 }
 
 
-//temporary rotating globe. I would like to replace this with an image that we draw
+// Rotating globe image positioned so that the animated wizard is walking over it.
 struct CircleRotation: View {
     @State private var degrees: Double = 0;
 
