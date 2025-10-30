@@ -35,7 +35,6 @@
 		727D40BA2EAB1CC100723A63 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 727D40B92EAB1CC100723A63 /* FirebaseStorage */; };
 		727D40BC2EAB1CC100723A63 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 727D40BB2EAB1CC100723A63 /* FirebaseStorageCombine-Community */; };
 		72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1AAC72EB154C40037A2BE /* Social.swift */; };
-		
 		8D048A402E959705004CC42A /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A3F2E959705004CC42A /* WizardView.swift */; };
 		8D048A422E959706004CC42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A412E959706004CC42A /* Assets.xcassets */; };
 		8D048A452E959706004CC42A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D048A442E959706004CC42A /* Preview Assets.xcassets */; };
@@ -43,6 +42,7 @@
 		8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */; };
 		8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */; };
 		8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30B4472EB29B8200281F08 /* StepManager.swift */; };
+		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +61,7 @@
 		8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCountViewModel.swift; sourceTree = "<group>"; };
 		8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWalkScene.swift; sourceTree = "<group>"; };
 		8D30B4472EB29B8200281F08 /* StepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepManager.swift; sourceTree = "<group>"; };
+		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +152,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8DF77B072EB2B2B3006D0A0F /* Fight.swift */,
 				72D1AAC72EB154C40037A2BE /* Social.swift */,
 				3E3070222EA32FB3005B4B33 /* Shop.swift */,
 				8D048A502E959FD4004CC42A /* Home.swift */,
@@ -245,8 +247,8 @@
 				72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */,
 				8D048A402E959705004CC42A /* WizardView.swift in Sources */,
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,
-
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
+				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
 				8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
@@ -381,10 +383,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Wobbily Wizard/Wobbily Wizard.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = 324Y6D3P55;
+				DEVELOPMENT_TEAM = B974UN6V32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -401,8 +404,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ashley-kulcsar.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jebarker.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -415,10 +419,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Wobbily Wizard/Wobbily Wizard.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = 324Y6D3P55;
+				DEVELOPMENT_TEAM = B974UN6V32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -435,8 +440,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ashley-kulcsar.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jebarker.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

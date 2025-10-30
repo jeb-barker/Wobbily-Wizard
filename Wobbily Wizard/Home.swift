@@ -15,28 +15,32 @@ struct Home: View {
     @StateObject private var stepCountModel = StepCountViewModel();
     
     var body: some View {
-        ZStack {
-            //Put the Background Image in:
-            Image("home_background").resizable().scaledToFill()
-            VStack {
-                
-                // set total equal to the percentage of steps taken towards the goal.
-                LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
-                Text("Steps: \(Int(stepCountModel.steps)) + \(Int(stepCountModel.pedometerSteps))").foregroundStyle(.white)
-                Spacer()
-                
-                Spacer()
-                CircleRotation().frame(width: 150, height: 150, alignment: .center)
-                Spacer()
-            }.task {
-                await stepCountModel.requestAuth()
-                //start counting steps
-                stepCountModel.startTimer()
+        NavigationStack {
+            ZStack {
+                //Put the Background Image in:
+                Image("home_background").resizable().scaledToFill()
+                VStack {
+                    
+                    // set total equal to the percentage of steps taken towards the goal.
+                    LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
+                    Text("Steps: \(Int(stepCountModel.steps))").foregroundStyle(.white)
+                    // Fight button is only active if the model allows it.
+                    if stepCountModel.isFinished() {
+                        NavigationLink("FIGHT!") {
+                            Fight()
+                        }
+                    }
+                    Spacer()
+                    CircleRotation().frame(width: 150, height: 150, alignment: .center)
+                    Spacer()
+                }.task {
+                    await stepCountModel.requestAuth()
+                    //start counting steps
+                    stepCountModel.startTimer()
+                }
+                .padding()
             }
-            .padding()
         }
-        
-        
     }
 }
 
@@ -70,11 +74,11 @@ struct LinearProgressView: View {
 
     var body: some View {
         VStack {
-            ProgressView(value: (stepCountModel.steps + stepCountModel.pedometerSteps), total: stepCountModel.stepGoal)
+            ProgressView(value: (stepCountModel.steps > stepCountModel.stepGoal ? stepCountModel.stepGoal : stepCountModel.steps), total: stepCountModel.stepGoal)
                 .progressViewStyle(PurplePotionProgressViewStyle()).environmentObject(stepCountModel)
             Button("More") {
                 Task{
-                    stepCountModel.startTimer()
+                    await stepCountModel.debugSteps()
                 }
             }.foregroundStyle(.white)
         }

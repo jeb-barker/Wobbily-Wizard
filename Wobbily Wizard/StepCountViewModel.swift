@@ -18,7 +18,6 @@ final class StepCountViewModel: ObservableObject, Codable {
     @Published var steps: Double = 0.0
     @Published var latestSteps : Int = 0
     @Published var stepGoal : Double = 300.0
-    @Published var pedometerSteps : Double = 0
     
     private var timer : Timer? = nil
     // manages steps taken in the current session
@@ -47,17 +46,22 @@ final class StepCountViewModel: ObservableObject, Codable {
                 }
             }
         }
-        // start the stepManager Timer
-        stepManager.fetchStepsInterval()
     }
     
     func updateSteps() {
         DispatchQueue.main.async {
-            //print("updating steps \(self.stepManager.getTotalSteps())")
+            print("updating steps \(self.stepManager.getTotalSteps())")
             self.steps = self.stepManager.getTotalSteps()
-            self.pedometerSteps = self.stepManager.pedometerSteps
             self.latestSteps = self.stepManager.latestSteps
         }
+    }
+    
+    func isFinished() -> Bool {
+        return self.stepManager.getTotalSteps() >= stepGoal
+    }
+    
+    func debugSteps() async {
+        await self.stepManager.fetchCumulativeSteps()
     }
     
     // Codable (Encoding / Decoding)
