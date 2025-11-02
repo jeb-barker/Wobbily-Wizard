@@ -26,7 +26,7 @@ class ItemData: ObservableObject {
     @Published var currentShop: [(component: String, name: String, cost: Int, type: String)]
 
     // Initializes time interval and first indexes
-    private let interval: TimeInterval = 3600
+    private let interval: TimeInterval = 36//00
     private var i1 = 0, i2 = 1, i3 = 2, i4 = 3, i5 = 4
 
     init() {
@@ -61,5 +61,23 @@ class ItemData: ObservableObject {
 
         // Update the shop items
         currentShop = [allItems[i1], allItems[i2], allItems[i3], allItems[i4], allItems[i5]]
+
+        // Keep refreshing
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+            let newIndexes = Array(0..<self.allItems.count).shuffled().prefix(5)
+            let indexes = Array(newIndexes)
+            self.i1 = indexes[0]
+            self.i2 = indexes[1]
+            self.i3 = indexes[2]
+            self.i4 = indexes[3]
+            self.i5 = indexes[4]
+            UserDefaults.standard.set(Date(), forKey: "shopLastGenTime")
+            UserDefaults.standard.set(indexes, forKey: "shopIndexes")
+            DispatchQueue.main.async {
+                self.currentShop = [self.allItems[self.i1], self.allItems[self.i2],
+                                    self.allItems[self.i3], self.allItems[self.i4],
+                                    self.allItems[self.i5]]
+            }
+        }
     }
 }
