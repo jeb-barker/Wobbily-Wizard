@@ -16,7 +16,7 @@ class AppData: ObservableObject {
 
 import SwiftUI
 
-class itemData: ObservableObject {
+class ItemData: ObservableObject {
     // (componant, name, price, type)
     let allItems = [("🌻", "Sun Flower", 2, "fire"), ("🌶️", "Hot Pepper", 4, "fire"), ("🌡️", "Thermometer", 6, "fire"), ("🧨", "Fire Cracker", 8, "fire"),
                     ("🔌", "Cable", 2, "electric"), ("🔋", "Battery", 4, "electric"), ("⚡", "Lightning", 6, "electric"), ("📱", "Device", 8, "electric"),
@@ -36,7 +36,7 @@ class itemData: ObservableObject {
         // Check if it’s been an hour
         if now.timeIntervalSince(lastGen) >= interval {
             // Generate new random indexes
-            let newIndexes = Array(0..<fullShop.count).shuffled().prefix(5)
+            let newIndexes = Array(0..<allItems.count).shuffled().prefix(5)
             let indexes = Array(newIndexes)
 
             i1 = indexes[0]
@@ -60,6 +60,6 @@ class itemData: ObservableObject {
         }
 
         // Update the shop items
-        currentShop = [fullShop[i1], fullShop[i2], fullShop[i3], fullShop[i4], fullShop[i5]]
+        currentShop = [allItems[i1], allItems[i2], allItems[i3], allItems[i4], allItems[i5]]
     }
 }
