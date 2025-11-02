@@ -10,6 +10,7 @@ import SwiftUI
 extension UIDevice {
     static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
 }
+
 class CustomWindow: UIWindow {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
             guard motion == .motionShake else { return }
@@ -22,16 +23,19 @@ extension UIScreen{
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
 }
+
 extension View {
     public func onShakeGesture(perform action: @escaping () -> Void) -> some View {
         self.modifier(ShakeGestureViewModifier(action: action))
     }
 }
+
 enum Screen {
     case home
     case cauldron
     case friends
 }
+
 struct ShakeGestureViewModifier: ViewModifier {
   // 1
   let action: () -> Void
@@ -44,9 +48,10 @@ struct ShakeGestureViewModifier: ViewModifier {
       }
   }
 }
+
 struct WizardView: View {
     @State private var currentView : Screen = .home
-    @StateObject var shopData = ShopData()
+    @StateObject var itemData = ItemData()
     
     var body: some View {
         NavigationStack {
@@ -63,7 +68,7 @@ struct WizardView: View {
                     Friends().tabItem(){
                         Label("Friends", systemImage: "person.2")
                     }
-                    Shop().environmentObject(shopData).tabItem() {
+                    Shop().environmentObject(itemData).tabItem() {
                         Label("Shop", systemImage: "cart.fill")
                     }
                     .toolbarBackground(.visible, for: .tabBar)
@@ -76,6 +81,7 @@ struct WizardView: View {
         }
     }
 }
+
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
 
