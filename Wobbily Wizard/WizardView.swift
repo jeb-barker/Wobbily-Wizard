@@ -134,5 +134,5 @@ struct Cauldren: View {
     }
 }
 #Preview {
-    WizardView()
+    WizardView().environmentObject(ItemData())
 }
