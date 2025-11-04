@@ -46,6 +46,9 @@ struct Fight: View {
             Text("ouchie")
             Button("Done?", action: {isFightComplete = !isFightComplete})
             
+            //Fight Scene
+            SpriteView(scene: FightScreenScene(), options: [.allowsTransparency,]).ignoresSafeArea()
+            
             Spacer()
             HStack {
                 Button {
