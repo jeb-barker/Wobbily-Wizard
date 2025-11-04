@@ -43,6 +43,7 @@
 		8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */; };
 		8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30B4472EB29B8200281F08 /* StepManager.swift */; };
 		8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */; };
+		8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E192EBA9D2C00E0A61B /* Landing.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWalkScene.swift; sourceTree = "<group>"; };
 		8D30B4472EB29B8200281F08 /* StepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepManager.swift; sourceTree = "<group>"; };
 		8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightScreenScene.swift; sourceTree = "<group>"; };
+		8DB17E192EBA9D2C00E0A61B /* Landing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +156,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8DB17E192EBA9D2C00E0A61B /* Landing.swift */,
 				8DF77B072EB2B2B3006D0A0F /* Fight.swift */,
 				72D1AAC72EB154C40037A2BE /* Social.swift */,
 				3E3070222EA32FB3005B4B33 /* Shop.swift */,
@@ -254,6 +257,7 @@
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
 				8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */,
+				8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
 			);

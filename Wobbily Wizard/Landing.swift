@@ -1,3 +1,10 @@
+//
+//  Landing.swift
+//  Wobbily Wizard
+//
+//  Created by Jeb Barker on 11/4/25.
+//
+
 import SwiftUI
 
 class currUser: ObservableObject{
