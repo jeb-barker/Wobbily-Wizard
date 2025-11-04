@@ -27,7 +27,7 @@ struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            WizardView()
+            WizardView().environmentObject(currUser())
         }
     }
 }
