@@ -43,6 +43,7 @@
 		8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */; };
 		8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30B4472EB29B8200281F08 /* StepManager.swift */; };
 		8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */; };
+		8DB17E182EBA93EB00E0A61B /* FightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E172EBA93E400E0A61B /* FightModel.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWalkScene.swift; sourceTree = "<group>"; };
 		8D30B4472EB29B8200281F08 /* StepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepManager.swift; sourceTree = "<group>"; };
 		8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightScreenScene.swift; sourceTree = "<group>"; };
+		8DB17E172EBA93E400E0A61B /* FightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightModel.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		8D048A3C2E959705004CC42A /* Wobbily Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				8DB17E172EBA93E400E0A61B /* FightModel.swift */,
 				8D048A762EA819A5004CC42A /* Scenes */,
 				3E0597CB2EA6AE7F004C3169 /* RandomData.swift */,
 				8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */,
@@ -247,6 +250,7 @@
 			files = (
 				3E0597CC2EA6AE7F004C3169 /* RandomData.swift in Sources */,
 				8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */,
+				8DB17E182EBA93EB00E0A61B /* FightModel.swift in Sources */,
 				72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */,
 				8D048A402E959705004CC42A /* WizardView.swift in Sources */,
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,

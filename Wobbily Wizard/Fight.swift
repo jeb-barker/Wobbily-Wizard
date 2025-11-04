@@ -10,6 +10,7 @@ import SpriteKit
 
 struct Fight: View {
     @State private var isFightComplete : Bool = false
+    @StateObject private var fightModel : FightModel = FightModel()
     
     var body: some View {
         VStack {
@@ -52,7 +53,7 @@ struct Fight: View {
             Spacer()
             HStack {
                 Button {
-                    // TODO
+                    fightModel.usePotion()
                 } label: {
                     Image("potion_red").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
                 }
