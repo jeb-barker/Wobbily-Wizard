@@ -85,22 +85,24 @@ struct WizardView: View {
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
 
-    let items = ["🍎", "🌿", "💎", "🐍", "🍔", "🍕", "🍜", "🌮", "🍣", "🥗", "💀", "🧪", "⛧", "🖤", "🕯️", "⚗️"]
+    let items = ["🍎", "🌿", "💎", "🐍", "🍔", "🍕", "🍜", "🌮"]
     var body: some View {
         VStack {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
-                ForEach(items, id: \.self) { item in
-                    Text(item)
-                        .font(.largeTitle)
-                        .frame(width: 60, height: 60)
-                        .background(Color.brown.opacity(0.3))
-                        .cornerRadius(10)
-                        .onDrag {
-                            return NSItemProvider(object: item as NSString)
-                        }
+            ScrollView{
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
+                    ForEach(items, id: \.self) { item in
+                        Text(item)
+                            .font(.largeTitle)
+                            .frame(width: 60, height: 60)
+                            .background(Color.brown.opacity(0.3))
+                            .cornerRadius(10)
+                            .onDrag {
+                                return NSItemProvider(object: item as NSString)
+                            }
+                    }
                 }
             }
-            .padding(.top, 40)
+
 
             Spacer()
             
@@ -131,6 +133,13 @@ struct Cauldren: View {
                 }
         }
         .padding()
+        .background(
+            Image("Cauldron_Background")
+                .resizable()
+                .scaledToFill()
+                .scaleEffect()
+                .offset(x: -50)
+        )
     }
 }
 #Preview {
