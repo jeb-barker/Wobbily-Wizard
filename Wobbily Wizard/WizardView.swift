@@ -31,6 +31,7 @@ extension View {
 }
 
 enum Screen {
+    case landing
     case home
     case cauldron
     case friends
