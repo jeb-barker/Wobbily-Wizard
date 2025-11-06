@@ -86,7 +86,7 @@ struct WizardView: View {
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
 
-    let items = ["🍎", "🌿", "💎", "🐍", "🍔", "🍕", "🍜", "🌮", "🍣", "🥗", "💀", "🧪", "⛧", "🖤", "🕯️", "⚗️"]
+    let items = ["🌻", "🌶️", "🌡️", "🧨", "🔌", "🔋", "⚡", "📱", "🐍", "🧪", "💀", "☢️", "🧊", "🍨", "🥶", "🐧"]
     var body: some View {
         VStack {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
