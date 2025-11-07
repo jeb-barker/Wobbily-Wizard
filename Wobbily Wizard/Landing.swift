@@ -20,19 +20,13 @@ struct Landing: View{
     @EnvironmentObject var currUserData: currUser
     @State var seenLanding: Bool = false
     var body: some View{
-        if(seenLanding == true){
-            WizardView()
-        }
-        VStack{
-            Text("Enter a nickname:")
-            TextField("Nickname here", text: $currUserData.currNickname)
-            //call wizardview() from here, similar to in wizardapp
-            //by this point, current user has UUID and nickname
-                .onAppear{
-                    seenLanding = true
-                }
-            Button("Submit"){
-                WizardView()
+        NavigationStack{
+            VStack{
+                Text("Enter a nickname:")
+                TextField("Nickname here", text: $currUserData.currNickname)
+                //call wizardview() from here, similar to in wizardapp
+                //by this point, current user has UUID and nickname
+                NavigationLink("Submit", destination: WizardView().environmentObject(currUser()))
             }
         }
     }
