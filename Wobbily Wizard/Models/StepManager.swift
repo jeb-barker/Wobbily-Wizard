@@ -140,11 +140,14 @@ class StepManager {
     // reset the manager (if goal has been met)
     func resetManager(_ prevSteps : Double, _ newSteps : Double, _ pedSteps : Double) {
         if prevSteps > 0 || pedSteps > 0 || newSteps > 0 {
-            if self.hkSteps + pedSteps + self.storedSteps >= self.stepGoal {
+            if self.hkSteps + self.pedometerSteps + self.storedSteps >= self.stepGoal {
                 //we made it to the step goal...
                 self.startTime = Date.now.zeroSeconds!.addingTimeInterval(TimeInterval(60))
                 self.pedometerSteps = 0
                 self.stepGoal *= 1.2 // TODO: change dynamically from database?
+                self.storedSteps = 0
+                self.latestSteps = 0
+                self.hkSteps = 0
                 //restart the pedometer
                 self.startPedometer()
             }
