@@ -43,6 +43,9 @@
 		8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */; };
 		8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30B4472EB29B8200281F08 /* StepManager.swift */; };
 		8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */; };
+		8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E192EBA9D2C00E0A61B /* Landing.swift */; };
+		8DB17E182EBA93EB00E0A61B /* FightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E172EBA93E400E0A61B /* FightModel.swift */; };
+		8DBB8EC12EBE46010037A42D /* PotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC02EBE45FC0037A42D /* PotionType.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 		B568666E2EBE8C0B00AEF28F /* Cauldron.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568666D2EBE8C0500AEF28F /* Cauldron.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +67,9 @@
 		8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWalkScene.swift; sourceTree = "<group>"; };
 		8D30B4472EB29B8200281F08 /* StepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepManager.swift; sourceTree = "<group>"; };
 		8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightScreenScene.swift; sourceTree = "<group>"; };
+		8DB17E192EBA9D2C00E0A61B /* Landing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
+		8DB17E172EBA93E400E0A61B /* FightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightModel.swift; sourceTree = "<group>"; };
+		8DBB8EC02EBE45FC0037A42D /* PotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotionType.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		B568666D2EBE8C0500AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +135,8 @@
 		8D048A3C2E959705004CC42A /* Wobbily Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				8DBB8EBF2EBE45160037A42D /* TypeEnums */,
+				8DBB8EBE2EBD6C3C0037A42D /* Models */,
 				8D048A762EA819A5004CC42A /* Scenes */,
 				3E0597CB2EA6AE7F004C3169 /* RandomData.swift */,
 				8D048A532E9846B0004CC42A /* Wobbily-Wizard-Info.plist */,
@@ -138,9 +146,7 @@
 				3E0597F72EA6BFE1004C3169 /* Wobbily_WizardApp.swift */,
 				8D048A412E959706004CC42A /* Assets.xcassets */,
 				8D048A432E959706004CC42A /* Preview Content */,
-				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
 				727D408B2EAB196C00723A63 /* GoogleService-Info.plist */,
-				8D30B4472EB29B8200281F08 /* StepManager.swift */,
 			);
 			path = "Wobbily Wizard";
 			sourceTree = "<group>";
@@ -156,7 +162,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B568666D2EBE8C0500AEF28F /* Cauldron.swift */,
+				8DB17E192EBA9D2C00E0A61B /* Landing.swift */,
 				8DF77B072EB2B2B3006D0A0F /* Fight.swift */,
 				72D1AAC72EB154C40037A2BE /* Social.swift */,
 				3E3070222EA32FB3005B4B33 /* Shop.swift */,
@@ -172,6 +178,24 @@
 				8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		8DBB8EBE2EBD6C3C0037A42D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8DB17E172EBA93E400E0A61B /* FightModel.swift */,
+				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
+				8D30B4472EB29B8200281F08 /* StepManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8DBB8EBF2EBE45160037A42D /* TypeEnums */ = {
+			isa = PBXGroup;
+			children = (
+				8DBB8EC02EBE45FC0037A42D /* PotionType.swift */,
+			);
+			path = TypeEnums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +274,7 @@
 			files = (
 				3E0597CC2EA6AE7F004C3169 /* RandomData.swift in Sources */,
 				8D048A752EA3BD31004CC42A /* StepCountViewModel.swift in Sources */,
+				8DB17E182EBA93EB00E0A61B /* FightModel.swift in Sources */,
 				72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */,
 				8D048A402E959705004CC42A /* WizardView.swift in Sources */,
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,
@@ -257,7 +282,9 @@
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
+				8DBB8EC12EBE46010037A42D /* PotionType.swift in Sources */,
 				8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */,
+				8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
 			);

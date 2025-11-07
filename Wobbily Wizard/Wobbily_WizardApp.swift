@@ -25,9 +25,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @State var seenLanding: Bool = false
     var body: some Scene {
         WindowGroup {
-            WizardView()
+            if(seenLanding == false){
+                Landing().environmentObject(currUser())
+                    .onAppear(){
+                        seenLanding = true
+                    }
+            }
+            else{
+                WizardView().environmentObject(currUser())
+            }
         }
     }
 }

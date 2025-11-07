@@ -56,6 +56,10 @@ final class StepCountViewModel: ObservableObject, Codable {
         }
     }
     
+    func fightOver() {
+        self.stepManager.resetManager(1, 0, 0)
+    }
+    
     func isFinished() -> Bool {
         return self.stepManager.getTotalSteps() >= stepGoal
     }

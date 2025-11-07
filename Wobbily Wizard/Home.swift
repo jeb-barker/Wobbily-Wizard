@@ -27,7 +27,7 @@ struct Home: View {
                     // Fight button is only active if the model allows it.
                     if stepCountModel.isFinished() {
                         NavigationLink("FIGHT!") {
-                            Fight()
+                            Fight().environmentObject(stepCountModel)
                         }
                     }
                     Spacer()
