@@ -44,6 +44,7 @@
 		8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30B4472EB29B8200281F08 /* StepManager.swift */; };
 		8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
+		B568666E2EBE8C0B00AEF28F /* Cauldron.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568666D2EBE8C0500AEF28F /* Cauldron.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		8D30B4472EB29B8200281F08 /* StepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepManager.swift; sourceTree = "<group>"; };
 		8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightScreenScene.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
+		B568666D2EBE8C0500AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B568666D2EBE8C0500AEF28F /* Cauldron.swift */,
 				8DF77B072EB2B2B3006D0A0F /* Fight.swift */,
 				72D1AAC72EB154C40037A2BE /* Social.swift */,
 				3E3070222EA32FB3005B4B33 /* Shop.swift */,
@@ -250,6 +253,7 @@
 				72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */,
 				8D048A402E959705004CC42A /* WizardView.swift in Sources */,
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,
+				B568666E2EBE8C0B00AEF28F /* Cauldron.swift in Sources */,
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
