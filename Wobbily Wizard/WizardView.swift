@@ -54,6 +54,7 @@ struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var itemData = ItemData()
     @EnvironmentObject var hasSeenLanding: seenLanding
+    @EnvironmentObject var currentuser : currUser
     
     var body: some View {
         NavigationStack {
@@ -89,5 +90,7 @@ struct WizardView: View {
 }
 
 #Preview {
-    WizardView().environmentObject(ItemData())
+    WizardView()
+        .environmentObject(currUser())
+        .environmentObject(seenLanding())
 }
