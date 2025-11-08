@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
+    @State private var shaken: Int = 0
 
     let items = ["🌻", "🌶️", "🌡️", "🧨", "🔌", "🔋", "⚡", "📱", "🐍", "🧪", "💀", "☢️", "🧊", "🍨", "🥶", "🐧"]
     
@@ -77,6 +78,19 @@ struct Cauldren: View {
                 .onShakeGesture{
                     print("Device is shaking!")
                 }
+            HStack{
+                Button("Reset"){
+                    print("hello world")
+                    
+                }
+                .disabled(droppedItems.isEmpty)
+                Spacer()
+                Button("Brew"){
+                    print("hello world")
+                }
+                .disabled(droppedItems.isEmpty)
+            }
+            
         }
         .padding()
         .background(
