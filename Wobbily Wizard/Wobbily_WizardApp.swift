@@ -32,8 +32,9 @@ class seenLanding: ObservableObject{
 @main
 struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @State var currentUser = currUser()
-    @State var hasSeenLanding = seenLanding()
+    @StateObject var currentUser = currUser()
+    @StateObject var hasSeenLanding = seenLanding()
+    
     var body: some Scene {
         WindowGroup {
             if(seenLanding().landing == false){
