@@ -38,7 +38,7 @@ enum Screen {
 }
 
 struct ShakeGestureViewModifier: ViewModifier {
-  // 1
+    // 1
   let action: () -> Void
   
   func body(content: Content) -> some View {
@@ -53,6 +53,7 @@ struct ShakeGestureViewModifier: ViewModifier {
 struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var itemData = ItemData()
+    @EnvironmentObject var hasSeenLanding: seenLanding
     
     var body: some View {
         NavigationStack {
@@ -76,6 +77,10 @@ struct WizardView: View {
                     .toolbarBackground(Color.white, for: .tabBar)
 
                 }.backgroundStyle(FillShapeStyle())
+                    .onAppear{
+                        hasSeenLanding.landing = true
+                    }
+                    .navigationBarBackButtonHidden(true)
             }
             
             

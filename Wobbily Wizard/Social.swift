@@ -24,8 +24,8 @@ struct Friends: View{
             Text("Friends List")
                 .bold()
                 .font(.title2)
-            Text("Nickname")
-            Text(userID.uuidString)
+            Text(currUserData.currNickname)
+            Text(currUserData.currUUID.uuidString)
                 .textSelection(.enabled)
             let lightBlue = Color(red: 0, green: 50, blue: 186)
             ScrollView{
