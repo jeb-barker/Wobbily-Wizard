@@ -11,7 +11,7 @@ struct Friends: View{
     @EnvironmentObject var currUserData : currUser
     var body: some View{
         //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
-        let userID = UUID()
+        let _ = UUID()
         let id1 = UUID()
         let id2 = UUID()
         let id3 = UUID()
