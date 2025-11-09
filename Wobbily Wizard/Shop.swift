@@ -8,15 +8,16 @@ import SwiftUI
 
 struct Shop: View {
     @EnvironmentObject var itemData: ItemData
-    @State private var balance = 1234567 // Max balance will be set to 9,999,999 later
+    @EnvironmentObject var playerData: PlayerData
+    
     var body: some View {
         VStack {
-            if (balance > 9999999) {
+            if (playerData.balance > 9999999) {
                 Text("🤑🤑🤑🤑")
                 .offset(x: -104, y: -239)
                 .font(.custom("Noteworthy", size: 17))
             } else {
-                Text("💎:\(balance)")
+                Text("💎:\(playerData.balance)")
                 .offset(x: -104, y: -239)
                 .font(.custom("Noteworthy", size: 17))
             }
@@ -26,7 +27,8 @@ struct Shop: View {
                     HStack(spacing: 40) {
                         // Icon
                         Button(action: {
-                            balance = balance - item.2
+                            playerData.balance -= item.2
+                            playerData.save()
                         }) {
                             Text(item.0)
                         }.offset(x: -90, y: 205)

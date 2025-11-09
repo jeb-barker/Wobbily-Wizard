@@ -19,6 +19,7 @@ class currUser: ObservableObject{
 struct Landing: View{
     @EnvironmentObject var currUserData: currUser
     @EnvironmentObject var hasSeenLanding: seenLanding
+    @EnvironmentObject var playerData: PlayerData
     //@State var seenLanding: Bool = false
     var body: some View{
         NavigationStack{
@@ -32,7 +33,10 @@ struct Landing: View{
                     .cornerRadius(8)
                 //call wizardview() from here, similar to in wizardapp
                 //by this point, current user has UUID and nickname
-                NavigationLink("Submit", destination: WizardView().environmentObject(currUserData).environmentObject(hasSeenLanding))
+                NavigationLink("Submit", destination: WizardView()
+                    .environmentObject(currUserData)
+                    .environmentObject(hasSeenLanding))
+                    .environmentObject(playerData)
             }
         }
     }

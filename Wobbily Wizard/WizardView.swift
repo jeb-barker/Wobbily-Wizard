@@ -23,6 +23,7 @@ enum Screen {
 struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var itemData = ItemData()
+    @EnvironmentObject var playerData: PlayerData
     @EnvironmentObject var hasSeenLanding: seenLanding
     @EnvironmentObject var currentuser : currUser
     
@@ -41,17 +42,21 @@ struct WizardView: View {
                     Friends().tabItem(){
                         Label("Friends", systemImage: "person.2")
                     }
-                    Shop().environmentObject(itemData).tabItem() {
+                    Shop().environmentObject(itemData).environmentObject(playerData).tabItem() {
                         Label("Shop", systemImage: "cart.fill")
                     }
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.white, for: .tabBar)
 
-                }.backgroundStyle(FillShapeStyle())
-                    .onAppear{
-                        hasSeenLanding.landing = true
-                    }
-                    .navigationBarBackButtonHidden(true)
+                }
+                .backgroundStyle(FillShapeStyle())
+                .onAppear{
+                    hasSeenLanding.landing = true
+                }
+                .onChange(of: playerData.inventory) { _ in playerData.save() }
+                .onChange(of: playerData.potions) { _ in playerData.save() }
+                .onChange(of: playerData.balance) { _ in playerData.save() }
+                .navigationBarBackButtonHidden(true)
             }
             
             
