@@ -16,12 +16,41 @@
 
 import SwiftUI
 
+class InventoryItem: Codable, Equatable {
+    
+    public var name : String
+    public var amount : Int
+    
+    init(_ name : String, _ amount : Int) {
+        self.name = name
+        self.amount = amount
+    }
+    
+    static func == (lhs: InventoryItem, rhs: InventoryItem) -> Bool {
+        return lhs.name == rhs.name && lhs.amount == rhs.amount
+    }
+}
+
+class InventoryPotion: Codable, Equatable {
+    public var name : String
+    public var amount : Int
+    
+    init(_ name : String, _ amount : Int) {
+        self.name = name
+        self.amount = amount
+    }
+    
+    static func == (lhs: InventoryPotion, rhs: InventoryPotion) -> Bool {
+        return lhs.name == rhs.name && lhs.amount == rhs.amount
+    }
+}
+
 // Observable object with the data for the player
-class playerData: ObservableObject {
+class PlayerData: ObservableObject, Codable {
     // Each item in inventory: [item, amount]
-    @Published var inventory: [[Any]] = []
+    @Published var inventory: [InventoryItem] = []
     // Each potion in list: [type, amount]
-    @Published var potions: [[Any]] = []
+    @Published var potions: [InventoryPotion] = []
     @Published var balance: Int = 0
 
     enum CodingKeys: String, CodingKey {
@@ -31,8 +60,8 @@ class playerData: ObservableObject {
     // Try and load saved data
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        inventory = try container.decode([[String]].self, forKey: .inventory)
-        potions = try container.decode([[String]].self, forKey: .potions)
+        inventory = try container.decode([InventoryItem].self, forKey: .inventory)
+        potions = try container.decode([InventoryPotion].self, forKey: .potions)
         balance = try container.decode(Int.self, forKey: .balance)
     }
 
@@ -52,11 +81,10 @@ class playerData: ObservableObject {
             self.balance = saved.balance
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
-            self.inventory = [["Sun Flower", "3"], ["Hot Pepper", "3"], ["Thermometer", "3"], ["Fire Cracker", "3"],
-                              ["Cable", "0"], ["Battery", "0"], ["Lightning", "0"], ["Device", "0"],
-                              ["Snake", "0"], ["Vile", "0"], ["Skull", "0"], ["Nuclear Waste", "0"],
-                              ["Ice Cube", "0"], ["Ice Cream", "0"], ["Frozen Fred", "0"], ["Penguin", "0"]]
-            self.potions = [["fire", 0], ["electric", 0], ["poison", 0], ["ice", "2"]]
+            self.inventory = [
+                InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vile", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
+            ]
+            self.potions = [InventoryPotion("fire", 0), InventoryPotion("electric", 0), InventoryPotion("poison", 0), InventoryPotion("ice", 2)]
             self.balance = 500
         }
     }

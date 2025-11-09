@@ -34,16 +34,19 @@ struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var currentUser = currUser()
     @StateObject var hasSeenLanding = seenLanding()
+    @StateObject var playerData = PlayerData()
     
     var body: some Scene {
         WindowGroup {
             if(seenLanding().landing == false){
                 Landing()
+                    .environmentObject(playerData)
                     .environmentObject(currentUser)
                     .environmentObject(hasSeenLanding)
             }
             else{
                 WizardView()
+                    .environmentObject(playerData)
                     .environmentObject(currentUser)
                     .environmentObject(hasSeenLanding)
             }
