@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+extension UIDevice {
+    static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
+}
+
+class CustomWindow: UIWindow {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+            guard motion == .motionShake else { return }
+            NotificationCenter.default.post(name: UIDevice.deviceDidShake, object: nil)
+    }
+}
+
+extension View {
+    public func onShakeGesture(perform action: @escaping () -> Void) -> some View {
+        self.modifier(ShakeGestureViewModifier(action: action))
+    }
+}
+
+struct ShakeGestureViewModifier: ViewModifier {
+    // 1
+  let action: () -> Void
+  
+  func body(content: Content) -> some View {
+    content
+      // 2
+      .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
+        action()
+      }
+  }
+}
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
     @State private var shaken: Int = 0

@@ -7,27 +7,10 @@
 
 import SwiftUI
 
-extension UIDevice {
-    static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
-}
-
-class CustomWindow: UIWindow {
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-            guard motion == .motionShake else { return }
-            NotificationCenter.default.post(name: UIDevice.deviceDidShake, object: nil)
-    }
-}
-
 extension UIScreen{
    static let screenWidth = UIScreen.main.bounds.size.width
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
-}
-
-extension View {
-    public func onShakeGesture(perform action: @escaping () -> Void) -> some View {
-        self.modifier(ShakeGestureViewModifier(action: action))
-    }
 }
 
 enum Screen {
@@ -35,19 +18,6 @@ enum Screen {
     case home
     case cauldron
     case friends
-}
-
-struct ShakeGestureViewModifier: ViewModifier {
-    // 1
-  let action: () -> Void
-  
-  func body(content: Content) -> some View {
-    content
-      // 2
-      .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
-        action()
-      }
-  }
 }
 
 struct WizardView: View {
