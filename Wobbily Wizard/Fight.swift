@@ -10,8 +10,14 @@ import SpriteKit
 
 struct Fight: View {
     @State private var isFightComplete : Bool = false
-    @StateObject private var fightModel : FightModel = FightModel()
+    @StateObject private var fightModel : FightModel
+    
+    @EnvironmentObject private var playerData : PlayerData
     @EnvironmentObject private var stepCountModel : StepCountViewModel
+    
+    init(_ playerData : PlayerData) {
+        _fightModel = StateObject(wrappedValue: FightModel(playerModel: playerData))
+    }
     
     var body: some View {
         if fightModel.isFightOver {
@@ -51,6 +57,7 @@ struct Fight: View {
                 
                 PotionBarView()
                     .environmentObject(fightModel)
+                    .environmentObject(playerData)
                     .frame(width: UIScreen.screenWidth, alignment: .bottom)
                     .background(Color.brown)
             }
@@ -67,20 +74,22 @@ struct Fight: View {
                     .frame(width: UIScreen.screenWidth,
                        alignment: .bottom)
                     .background(Color.brown)
-                //Evil Wizard (temp image)
-                Image("evil_wizard")
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight/4)
-                    .scaleEffect(1.5)
+                //Evil Wizard
+                SpriteView(scene: EvilWizardTauntScene(), options: [.allowsTransparency])
+                    .frame(width: UIScreen.screenWidth,
+                           height: UIScreen.screenHeight * (1/3),
+                           alignment: .bottom)
                 Divider()
                 //Temp
                 
                 //Fight Scene
-                SpriteView(scene: FightScreenScene(), options: [.allowsTransparency,]).ignoresSafeArea()
+                SpriteView(scene: FightScreenScene(), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
                 
                 Spacer()
                 //Potion Bar
                 PotionBarView()
                     .environmentObject(fightModel)
+                    .environmentObject(playerData)
                     .frame(width: UIScreen.screenWidth, alignment: .bottom)
                     .background(Color.brown)
             }
@@ -126,39 +135,37 @@ struct HealthProgressStyle: ProgressViewStyle {
 }
 
 struct PotionBarView: View {
-    @EnvironmentObject var fightModel : FightModel;
+    @EnvironmentObject var fightModel : FightModel
+    @EnvironmentObject var playerData : PlayerData
 
     var body: some View {
         HStack {
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.red)
+            ForEach(playerData.potions, id: \.potionType)
+            {
+                potion in
+                
+                Button {
+                    //potions can only be used if the fight isn't over
+                    if !fightModel.isFightOver {
+                        fightModel.usePotion(potion.potionType)
+                    }
+                } label: {
+                    ZStack {
+                        Image("potion_\(potion.potionType.rawString)")
+                                .frame(width: UIScreen.screenWidth / 6)
+                                .scaleEffect(2)
+                                .padding(8)
+                        
+                        Text("x\(potion.amount)")
+                            .frame(alignment: .bottomTrailing)
+                            .offset(x:40, y:40)
+                            .padding(8)
+                            .foregroundColor(.black)
+                    }
+                    
                 }
-            } label: {
-                Image("potion_red").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
             }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.green)
-                }
-            } label: {
-                Image("potion_green").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.yellow)
-                }
-            } label: {
-                Image("potion_yellow").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.purple)
-                }
-            } label: {
-                Image("potion_purple").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-        }
+        }.offset(x:-10)
 
     }
 }
@@ -179,5 +186,7 @@ struct FightStatusBarView: View {
 }
 
 #Preview {
-    Fight()
+    Fight(PlayerData())
+        .environmentObject(PlayerData())
+        .environmentObject(StepCountViewModel())
 }

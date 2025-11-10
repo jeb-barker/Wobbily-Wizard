@@ -21,19 +21,33 @@ final class FightModel: ObservableObject {
     @Published var isFightOver : Bool = false
     @Published var isPlayerWinner : Bool = false
     
+    // Player inventory and potions
+    private var playerData : PlayerData
     
-    init() {
+    
+    init(playerModel playerData : PlayerData) {
         //random seed
         srand48(time_t())
+        self.playerData = playerData
     }
     
     // Attack the enemy
     func usePotion(_ potionType : PotionType) {
-        if potionType == enemyWeakness {
-            enemyHealth -= 20
-        }
-        else {
-            enemyHealth -= 5
+        for potion in playerData.potions {
+            //find the potion type that the player chose:
+            if potion.name == potionType.description {
+                // if they have one available
+                if potion.amount > 0 {
+                    if potionType == enemyWeakness {
+                        enemyHealth -= 20
+                    }
+                    else {
+                        enemyHealth -= 5
+                    }
+                    //remove a potion from the inventory
+                    potion.amount -= 1
+                }
+            }
         }
         
         // end turn

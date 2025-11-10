@@ -66,6 +66,7 @@ struct WizardView: View {
                     }
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.white, for: .tabBar)
+                    .environmentObject(playerData)
                     Cauldren().tabItem {
                         Label("Cauldron", systemImage: "wand.and.stars")
                     }
@@ -98,4 +99,5 @@ struct WizardView: View {
     WizardView()
         .environmentObject(currUser())
         .environmentObject(seenLanding())
+        .environmentObject(PlayerData())
 }
