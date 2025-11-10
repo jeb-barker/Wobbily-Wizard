@@ -12,30 +12,30 @@ struct Shop: View {
     
     var body: some View {
         VStack {
-            if (playerData.balance > 9999999) {
+            if (playerData.balance > 999999) {
                 Text("🤑🤑🤑🤑")
                 .offset(x: -104, y: -239)
                 .font(.custom("Noteworthy", size: 17))
             } else {
-                Text("💎:\(playerData.balance)")
+                Text("💎 \(playerData.balance)")
                 .offset(x: -104, y: -239)
                 .font(.custom("Noteworthy", size: 17))
             }
             VStack(alignment: .leading, spacing: 15) {
                 ForEach(0..<itemData.currentShop.count, id: \.self) { rowIndex in
                     let item = itemData.currentShop[rowIndex]
-                    HStack(spacing: 40) {
+                    HStack(spacing: 15) {
                         // Icon
                         Button(action: {
                             playerData.balance -= item.2
                             playerData.save()
                         }) {
                             Text(item.0)
-                        }.offset(x: -90, y: 205)
+                        }.offset(x: -45, y: 205)
                         // Name
-                        Text(item.1).offset(x: -90, y: 205)
+                        Text(item.1).offset(x: -45, y: 205)
                         // Cost
-                        Text("💎 \(item.2)")
+                        Text("💎 \(item.2)").offset(x: -45, y: 205)
                     }
                 }
             }
