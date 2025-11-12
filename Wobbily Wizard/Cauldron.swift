@@ -92,6 +92,7 @@ struct Cauldren: View {
                         _ = provider.loadObject(ofClass: String.self) { (string, _) in
                             if let item = string {
                                 DispatchQueue.main.async {
+                                    // if item is in the inventory
                                     droppedItems.append(item)
                                 }
                             }
@@ -109,7 +110,7 @@ struct Cauldren: View {
                 }
             HStack{
                 Button("Reset"){
-                    print("hello world")
+                    droppedItems = reset_pot()
                     
                 }
                 .disabled(droppedItems.isEmpty)
@@ -117,7 +118,7 @@ struct Cauldren: View {
                 Button("Brew"){
                     print("hello world")
                 }
-                .disabled(droppedItems.isEmpty)
+                .disabled(!checkRecipe(items: droppedItems).0)
             }
             
         }
