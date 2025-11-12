@@ -50,6 +50,7 @@
 		8DBB8EC52EC01DF00037A42D /* InventoryPotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC42EC01DF00037A42D /* InventoryPotion.swift */; };
 		8DBB8EC72EC01E790037A42D /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC62EC01E790037A42D /* PlayerData.swift */; };
 		8DBB8EC92EC277F80037A42D /* EvilWizardTauntScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */; };
+		8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 		B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56866772EBE961D00AEF28F /* Cauldron.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		8DBB8EC42EC01DF00037A42D /* InventoryPotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryPotion.swift; sourceTree = "<group>"; };
 		8DBB8EC62EC01E790037A42D /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
 		8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardTauntScene.swift; sourceTree = "<group>"; };
+		8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardFightScene.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		B568666D2EBE8C0500AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 		B56866772EBE961D00AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */,
+				8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */,
 				8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */,
 				8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */,
 			);
@@ -305,6 +308,7 @@
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
 				B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */,
+				8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
 				8DBB8EC12EBE46010037A42D /* PotionType.swift in Sources */,
 				8DBB8EC32EC01DDA0037A42D /* InventoryItem.swift in Sources */,

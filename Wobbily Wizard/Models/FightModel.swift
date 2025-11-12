@@ -15,6 +15,7 @@ final class FightModel: ObservableObject {
     @Published var turnsRemaining : Int = 10
     @Published var enemyHealth : Double = 100
     @Published var enemyWeakness : PotionType = .green
+    @Published var enemyShape : [Int]? // For use in the fight scene
     
     //status variables
     @Published var isPlayerTurn : Bool = true
@@ -23,6 +24,12 @@ final class FightModel: ObservableObject {
     
     // Player inventory and potions
     private var playerData : PlayerData
+    @Published var currentSelectedPotionType : PotionType? = nil
+    
+    //Casting
+    private var spellTimer : Timer?
+    @Published var isCasting : Bool = false
+    public var wizardTauntScene: EvilWizardFightScene?
     
     
     init(playerModel playerData : PlayerData) {
@@ -38,20 +45,31 @@ final class FightModel: ObservableObject {
             if potion.name == potionType.description {
                 // if they have one available
                 if potion.amount > 0 {
-                    if potionType == enemyWeakness {
-                        enemyHealth -= 20
-                    }
-                    else {
-                        enemyHealth -= 5
-                    }
+                    // set the selected potion type
+                    self.currentSelectedPotionType = potion.potionType
                     //remove a potion from the inventory
                     potion.amount -= 1
+                    // generate a new shape (3 vertices for now)
+                    generateShape(vertices: 3)
+                    // Send the current shape to the tauntScene
+                    if let wizardTauntScene {
+                        wizardTauntScene.updateCircles(enemyShape: enemyShape ?? [])
+                    }
+                    // start a timer that sets isCasting to true over a 5-second interval
+                    isCasting = true
+                    spellTimer = Timer.scheduledTimer(
+                        withTimeInterval: 5,
+                        repeats: false,
+                        block: {timer in
+                            print("timer over")
+                            self.isCasting = false
+                            // end turn
+                            self.endTurn()
+                        }
+                    )
                 }
             }
         }
-        
-        // end turn
-        endTurn()
     }
     
     func endTurn() {
@@ -81,6 +99,48 @@ final class FightModel: ObservableObject {
                 isPlayerWinner = true
                 isFightOver = true
             }
+        }
+    }
+    
+    func generateShape(vertices : Int) {
+        enemyShape = []
+        var currVert : Int = -1
+        for _ in 0 ..< vertices {
+            currVert = Int(drand48()*5) // random index between 0 and 4
+            while currVert == enemyShape?.last {
+                currVert = Int(drand48()*5) // random index between 0 and 4
+            }
+            enemyShape?.append(currVert)
+        }
+        for v in enemyShape! {
+            print(v)
+        }
+    }
+    
+    func onShapeDrawn(candles : [Int]) {
+        var damage = 0
+        //only allow if currently casting
+        if isCasting {
+            if candles.count == self.enemyShape?.count {
+                damage = 20
+                for (index, candle) in candles.enumerated() {
+                    if candle != self.enemyShape?[index] {
+                        damage = 10
+                    }
+                }
+                
+                // Do potion damage
+                if currentSelectedPotionType == enemyWeakness {
+                    damage *= 2
+                }
+                enemyHealth -= Double(damage)
+            }
+            
+            //end the casting state
+            spellTimer?.invalidate()
+            isCasting = false
+            // end turn
+            endTurn()
         }
     }
     

@@ -15,8 +15,13 @@ struct Fight: View {
     @EnvironmentObject private var playerData : PlayerData
     @EnvironmentObject private var stepCountModel : StepCountViewModel
     
+    private let tauntScene : EvilWizardFightScene
+    
     init(_ playerData : PlayerData) {
         _fightModel = StateObject(wrappedValue: FightModel(playerModel: playerData))
+        
+        tauntScene = EvilWizardFightScene(size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight * (1/3)))
+        
     }
     
     var body: some View {
@@ -63,7 +68,7 @@ struct Fight: View {
             }
             .navigationBarBackButtonHidden(false)
             .onDisappear {
-                stepCountModel.fightOver()
+                stepCountModel.fightOver(didPlayerWin: self.fightModel.isPlayerWinner)
             }
         }
         else {
@@ -75,15 +80,34 @@ struct Fight: View {
                        alignment: .bottom)
                     .background(Color.brown)
                 //Evil Wizard
-                SpriteView(scene: EvilWizardTauntScene(), options: [.allowsTransparency])
+                SpriteView(scene: tauntScene, options: [.allowsTransparency])
                     .frame(width: UIScreen.screenWidth,
                            height: UIScreen.screenHeight * (1/3),
                            alignment: .bottom)
                 Divider()
                 //Temp
                 
-                //Fight Scene
-                SpriteView(scene: FightScreenScene(), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
+                ZStack {
+                    //Fight Scene
+                    SpriteView(scene: FightScreenScene(fightModel: fightModel, size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight/3)), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button("Pass") {
+                                self.fightModel.endTurn()
+                            }
+                            .frame(alignment: .bottom)
+                            .padding(10)
+                            .buttonStyle(.borderedProminent)
+                            
+                        }
+                        .padding(10)
+                        Spacer()
+                    }
+                    
+                    
+                }
+                
                 
                 Spacer()
                 //Potion Bar
@@ -94,6 +118,9 @@ struct Fight: View {
                     .background(Color.brown)
             }
             .navigationBarBackButtonHidden(true)
+            .task {
+                self.fightModel.wizardTauntScene = tauntScene
+            }
         }
         
         
@@ -145,8 +172,8 @@ struct PotionBarView: View {
                 potion in
                 
                 Button {
-                    //potions can only be used if the fight isn't over
-                    if !fightModel.isFightOver {
+                    //potions can only be used if the fight isn't over and the player isn't 'casting'
+                    if !fightModel.isFightOver && !fightModel.isCasting {
                         fightModel.usePotion(potion.potionType)
                     }
                 } label: {
@@ -176,8 +203,9 @@ struct FightStatusBarView: View {
     var body: some View {
         HStack {
             //Status Effects Bar (just show icons...)
-            Text("Weak to: \(fightModel.enemyWeakness.description)").frame(maxWidth: .infinity, alignment: .leading)
+            Text("Weaness:\n \(fightModel.enemyWeakness.description.capitalized)").frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(fightModel.enemyWeakness.color)//TODO
+                .font(.title)
             //Turns remaining
             Text("\(fightModel.turnsRemaining)").frame(maxWidth: .infinity, alignment: .center)
             HealthProgressView().environmentObject(fightModel).frame(maxWidth: .infinity, alignment: .trailing)
