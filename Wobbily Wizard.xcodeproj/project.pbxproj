@@ -46,6 +46,11 @@
 		8DB17E182EBA93EB00E0A61B /* FightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E172EBA93E400E0A61B /* FightModel.swift */; };
 		8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB17E192EBA9D2C00E0A61B /* Landing.swift */; };
 		8DBB8EC12EBE46010037A42D /* PotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC02EBE45FC0037A42D /* PotionType.swift */; };
+		8DBB8EC32EC01DDA0037A42D /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC22EC01DDA0037A42D /* InventoryItem.swift */; };
+		8DBB8EC52EC01DF00037A42D /* InventoryPotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC42EC01DF00037A42D /* InventoryPotion.swift */; };
+		8DBB8EC72EC01E790037A42D /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC62EC01E790037A42D /* PlayerData.swift */; };
+		8DBB8EC92EC277F80037A42D /* EvilWizardTauntScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */; };
+		8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
 		B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56866772EBE961D00AEF28F /* Cauldron.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +75,11 @@
 		8DB17E172EBA93E400E0A61B /* FightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightModel.swift; sourceTree = "<group>"; };
 		8DB17E192EBA9D2C00E0A61B /* Landing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
 		8DBB8EC02EBE45FC0037A42D /* PotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotionType.swift; sourceTree = "<group>"; };
+		8DBB8EC22EC01DDA0037A42D /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
+		8DBB8EC42EC01DF00037A42D /* InventoryPotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryPotion.swift; sourceTree = "<group>"; };
+		8DBB8EC62EC01E790037A42D /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardTauntScene.swift; sourceTree = "<group>"; };
+		8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardFightScene.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		B568666D2EBE8C0500AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 		B56866772EBE961D00AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
@@ -177,6 +187,8 @@
 		8D048A762EA819A5004CC42A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */,
+				8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */,
 				8DB17E152EBA7C4500E0A61B /* FightScreenScene.swift */,
 				8D048A772EA819DE004CC42A /* PlayerWalkScene.swift */,
 			);
@@ -189,6 +201,7 @@
 				8DB17E172EBA93E400E0A61B /* FightModel.swift */,
 				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
 				8D30B4472EB29B8200281F08 /* StepManager.swift */,
+				8DBB8EC62EC01E790037A42D /* PlayerData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				8DBB8EC02EBE45FC0037A42D /* PotionType.swift */,
+				8DBB8EC22EC01DDA0037A42D /* InventoryItem.swift */,
+				8DBB8EC42EC01DF00037A42D /* InventoryPotion.swift */,
 			);
 			path = TypeEnums;
 			sourceTree = "<group>";
@@ -289,13 +304,18 @@
 				72D1AAC82EB154CF0037A2BE /* Social.swift in Sources */,
 				8D048A402E959705004CC42A /* WizardView.swift in Sources */,
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,
+				8DBB8EC72EC01E790037A42D /* PlayerData.swift in Sources */,
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
 				B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */,
+				8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
 				8DBB8EC12EBE46010037A42D /* PotionType.swift in Sources */,
+				8DBB8EC32EC01DDA0037A42D /* InventoryItem.swift in Sources */,
+				8DBB8EC52EC01DF00037A42D /* InventoryPotion.swift in Sources */,
 				8D048A782EA819DE004CC42A /* PlayerWalkScene.swift in Sources */,
 				8DB17E1A2EBA9D2F00E0A61B /* Landing.swift in Sources */,
+				8DBB8EC92EC277F80037A42D /* EvilWizardTauntScene.swift in Sources */,
 				8D048A512E959FD4004CC42A /* Home.swift in Sources */,
 				3E3070232EA32FB3005B4B33 /* Shop.swift in Sources */,
 			);

@@ -50,14 +50,21 @@ final class StepCountViewModel: ObservableObject, Codable {
     
     func updateSteps() {
         DispatchQueue.main.async {
-            print("updating steps \(self.stepManager.getTotalSteps())")
+            //print("updating steps \(self.stepManager.getTotalSteps())")
             self.steps = self.stepManager.getTotalSteps()
             self.latestSteps = self.stepManager.latestSteps
         }
     }
     
-    func fightOver() {
+    func fightOver(didPlayerWin : Bool) {
+        
         self.stepManager.resetManager(1, 0, 0)
+        if didPlayerWin {
+            self.stepGoal *= 1.2 //TODO: Balance this
+        }
+        //make sure the step goals are aligned
+        self.stepManager.stepGoal = self.stepGoal
+        
     }
     
     func isFinished() -> Bool {

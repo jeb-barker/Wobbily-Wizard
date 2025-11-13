@@ -17,7 +17,7 @@ class StepManager {
     private var error: Error?
     //Step Variables
     private var hkSteps: Double = 0.0
-    private var stepGoal : Double = 300.0
+    public var stepGoal : Double = 300.0
     public var latestSteps : Int = 0
     public var pedometerSteps : Double = 0 // TODO: make private after testing
     public var storedSteps : Double = 0
@@ -142,7 +142,7 @@ class StepManager {
         if prevSteps > 0 || pedSteps > 0 || newSteps > 0 {
             if self.hkSteps + self.pedometerSteps + self.storedSteps >= self.stepGoal {
                 //we made it to the step goal...
-                self.startTime = Date.now.zeroSeconds!.addingTimeInterval(TimeInterval(60))
+                self.startTime = Date.now.zeroSeconds!.addingTimeInterval(TimeInterval(-1))
                 self.pedometerSteps = 0
                 self.stepGoal *= 1.2 // TODO: change dynamically from database?
                 self.storedSteps = 0

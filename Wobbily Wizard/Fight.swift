@@ -10,8 +10,19 @@ import SpriteKit
 
 struct Fight: View {
     @State private var isFightComplete : Bool = false
-    @StateObject private var fightModel : FightModel = FightModel()
+    @StateObject private var fightModel : FightModel
+    
+    @EnvironmentObject private var playerData : PlayerData
     @EnvironmentObject private var stepCountModel : StepCountViewModel
+    
+    private let tauntScene : EvilWizardFightScene
+    
+    init(_ playerData : PlayerData) {
+        _fightModel = StateObject(wrappedValue: FightModel(playerModel: playerData))
+        
+        tauntScene = EvilWizardFightScene(size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight * (1/3)))
+        
+    }
     
     var body: some View {
         if fightModel.isFightOver {
@@ -51,12 +62,13 @@ struct Fight: View {
                 
                 PotionBarView()
                     .environmentObject(fightModel)
+                    .environmentObject(playerData)
                     .frame(width: UIScreen.screenWidth, alignment: .bottom)
                     .background(Color.brown)
             }
             .navigationBarBackButtonHidden(false)
             .onDisappear {
-                stepCountModel.fightOver()
+                stepCountModel.fightOver(didPlayerWin: self.fightModel.isPlayerWinner)
             }
         }
         else {
@@ -67,24 +79,48 @@ struct Fight: View {
                     .frame(width: UIScreen.screenWidth,
                        alignment: .bottom)
                     .background(Color.brown)
-                //Evil Wizard (temp image)
-                Image("evil_wizard")
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight/4)
-                    .scaleEffect(1.5)
+                //Evil Wizard
+                SpriteView(scene: tauntScene, options: [.allowsTransparency])
+                    .frame(width: UIScreen.screenWidth,
+                           height: UIScreen.screenHeight * (1/3),
+                           alignment: .bottom)
                 Divider()
                 //Temp
                 
-                //Fight Scene
-                SpriteView(scene: FightScreenScene(), options: [.allowsTransparency,]).ignoresSafeArea()
+                ZStack {
+                    //Fight Scene
+                    SpriteView(scene: FightScreenScene(fightModel: fightModel, size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight/3)), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button("Pass") {
+                                self.fightModel.endTurn()
+                            }
+                            .frame(alignment: .bottom)
+                            .padding(10)
+                            .buttonStyle(.borderedProminent)
+                            
+                        }
+                        .padding(10)
+                        Spacer()
+                    }
+                    
+                    
+                }
+                
                 
                 Spacer()
                 //Potion Bar
                 PotionBarView()
                     .environmentObject(fightModel)
+                    .environmentObject(playerData)
                     .frame(width: UIScreen.screenWidth, alignment: .bottom)
                     .background(Color.brown)
             }
             .navigationBarBackButtonHidden(true)
+            .task {
+                self.fightModel.wizardTauntScene = tauntScene
+            }
         }
         
         
@@ -126,39 +162,37 @@ struct HealthProgressStyle: ProgressViewStyle {
 }
 
 struct PotionBarView: View {
-    @EnvironmentObject var fightModel : FightModel;
+    @EnvironmentObject var fightModel : FightModel
+    @EnvironmentObject var playerData : PlayerData
 
     var body: some View {
         HStack {
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.red)
+            ForEach(playerData.potions, id: \.potionType)
+            {
+                potion in
+                
+                Button {
+                    //potions can only be used if the fight isn't over and the player isn't 'casting'
+                    if !fightModel.isFightOver && !fightModel.isCasting {
+                        fightModel.usePotion(potion.potionType)
+                    }
+                } label: {
+                    ZStack {
+                        Image("potion_\(potion.potionType.rawString)")
+                                .frame(width: UIScreen.screenWidth / 6)
+                                .scaleEffect(2)
+                                .padding(8)
+                        
+                        Text("x\(potion.amount)")
+                            .frame(alignment: .bottomTrailing)
+                            .offset(x:40, y:40)
+                            .padding(8)
+                            .foregroundColor(.black)
+                    }
+                    
                 }
-            } label: {
-                Image("potion_red").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
             }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.green)
-                }
-            } label: {
-                Image("potion_green").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.yellow)
-                }
-            } label: {
-                Image("potion_yellow").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-            Button {
-                if !fightModel.isFightOver {
-                    fightModel.usePotion(.purple)
-                }
-            } label: {
-                Image("potion_purple").frame(width: UIScreen.screenWidth / 6).scaleEffect(2).padding(8)
-            }
-        }
+        }.offset(x:-10)
 
     }
 }
@@ -169,8 +203,9 @@ struct FightStatusBarView: View {
     var body: some View {
         HStack {
             //Status Effects Bar (just show icons...)
-            Text("Weak to: \(fightModel.enemyWeakness.description)").frame(maxWidth: .infinity, alignment: .leading)
+            Text("Weaness:\n \(fightModel.enemyWeakness.description.capitalized)").frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(fightModel.enemyWeakness.color)//TODO
+                .font(.title)
             //Turns remaining
             Text("\(fightModel.turnsRemaining)").frame(maxWidth: .infinity, alignment: .center)
             HealthProgressView().environmentObject(fightModel).frame(maxWidth: .infinity, alignment: .trailing)
@@ -179,5 +214,7 @@ struct FightStatusBarView: View {
 }
 
 #Preview {
-    Fight()
+    Fight(PlayerData())
+        .environmentObject(PlayerData())
+        .environmentObject(StepCountViewModel())
 }

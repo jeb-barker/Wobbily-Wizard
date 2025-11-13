@@ -10,6 +10,7 @@ import SpriteKit
 class PlayerWalkScene: SKScene {
     
     var player: SKSpriteNode!
+    var rotatingCircle: SKSpriteNode!
     
     private var playerAtlas: SKTextureAtlas {
         return SKTextureAtlas(named: "Wizard Walk Atlas")
@@ -48,17 +49,39 @@ class PlayerWalkScene: SKScene {
     }
     
     private func setupPlayer() {
-        player = SKSpriteNode(texture: playerTexture, size: CGSize(width: 1, height: 1))
-        player.position = CGPoint(x: frame.width/2, y: frame.height/2)
+        player = SKSpriteNode(texture: playerTexture)
+        player.position = CGPoint(x: frame.width/2, y: frame.height * (2/3))
+        player.size.width = frame.width * (2/5)
+        player.size.height = frame.height * (2/5)
+        player.scale(to: player.size)
         
         addChild(player)
+    }
+    
+    private func setupRotatingCircle() {
+        // Create the rotating image node
+        rotatingCircle = SKSpriteNode(imageNamed: "home_globe")
+        rotatingCircle.position = CGPoint(x: frame.width/2, y: -frame.height/2)
+        rotatingCircle.size = CGSize(width: frame.width * 2, height: frame.width * 2)
+        rotatingCircle.zPosition = -1 // make sure player is rendered over top of the globe
+        
+        addChild(rotatingCircle)
     }
     
     override func didMove(to view: SKView) {
         self.backgroundColor = SKColor.clear
         self.scaleMode = .aspectFill
+        
+        self.setupRotatingCircle()
         self.setupPlayer()
         self.startIdleAnimation()
+        self.startCircleRotation()
+    }
+    
+    private func startCircleRotation() {
+        let rotate = SKAction.rotate(byAngle: CGFloat.pi * 2, duration: 120.0)
+        let repeatRotation = SKAction.repeatForever(rotate)
+        rotatingCircle.run(repeatRotation)
     }
     
     func startIdleAnimation() {

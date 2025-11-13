@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-enum PotionType: Int, CustomStringConvertible {
+enum PotionType: Int, CustomStringConvertible, Codable {
     case red
     case purple
     case green
@@ -17,7 +17,7 @@ enum PotionType: Int, CustomStringConvertible {
         case .red:
             return Color.red
         case .purple:
-            return Color.purple
+            return Color.purple //TODO: change this to an icy color
         case .green:
             return Color.green
         case .yellow:
@@ -26,6 +26,19 @@ enum PotionType: Int, CustomStringConvertible {
     }
     
     var description: String {
+        switch self {
+        case .red:
+            return "fire"
+        case .purple:
+            return "ice"
+        case .green:
+            return "poison"
+        case .yellow:
+            return "electric"
+        }
+    }
+    
+    var rawString: String {
         switch self {
         case .red:
             return "red"

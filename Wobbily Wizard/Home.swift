@@ -14,11 +14,15 @@ struct Home: View {
     @State private var total : Double = 0.1
     @StateObject private var stepCountModel = StepCountViewModel();
     
+    @EnvironmentObject private var playerData : PlayerData
+    
+    private let globeSize = UIScreen.main.bounds.width * 1.5
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 //Put the Background Image in:
-                Image("home_background").resizable().scaledToFill()
+                Image("home_background").resizable().scaledToFill().ignoresSafeArea()
                 VStack {
                     
                     // set total equal to the percentage of steps taken towards the goal.
@@ -27,19 +31,35 @@ struct Home: View {
                     // Fight button is only active if the model allows it.
                     if stepCountModel.isFinished() {
                         NavigationLink("FIGHT!") {
-                            Fight().environmentObject(stepCountModel)
+                            Fight(playerData).environmentObject(stepCountModel)
                         }
                     }
                     Spacer()
-                    CircleRotation().frame(width: 150, height: 150, alignment: .center)
-                    Spacer()
+                    
+                    // Evil Wizard sprite
+                    SpriteView(scene: EvilWizardTauntScene(), options: [.allowsTransparency])
+                        .frame(width: UIScreen.screenWidth,
+                               height: UIScreen.screenHeight * (1/3),
+                               alignment: .bottom)
+                        .opacity(0.2 + stepCountModel.steps / stepCountModel.stepGoal)
+                    
+                    // Player and globe sprites
+                    SpriteView(scene: PlayerWalkScene(), options: [.allowsTransparency])
+                        .ignoresSafeArea(edges: .bottom)
+                        .frame(width: UIScreen.screenWidth,
+                               height: UIScreen.screenHeight * (1/3),
+                               alignment: .bottom)
+                        .offset(y:UIScreen.screenHeight * (1/9))
+                        
+                            
                 }.task {
                     await stepCountModel.requestAuth()
                     //start counting steps
                     stepCountModel.startTimer()
                 }
                 .padding()
-            }
+                .frame(maxHeight:.infinity)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
@@ -48,24 +68,22 @@ struct Home: View {
 // Rotating globe image positioned so that the animated wizard is walking over it.
 struct CircleRotation: View {
     @State private var degrees: Double = 0;
+    private var size : Double
+    
+    init(_ size : Double) {
+        self.size = size
+    }
 
     var body: some View {
-        GeometryReader {
-            geometry in
-            // Display the player's walking animation
-            SpriteView(scene: PlayerWalkScene(), options: [.allowsTransparency]).ignoresSafeArea()
-            // Rotate the Globe Sprite
-            Image("home_globe")
-                        .resizable()
-                        .foregroundColor(.blue)
-                        .rotationEffect(Angle(degrees: -degrees)) // Apply rotation effect
-                        .animation(Animation.linear(duration: 150).repeatForever(autoreverses: false), value: degrees) // Apply animation
-                        .frame(width: 1000, height: 1000)
-                        .position(x:geometry.size.width/2, y:(geometry.size.height/2) + 570)
-                        .onAppear {
-                            degrees = 360
-                        }
-        }
+                // Rotate the Globe Sprite
+        Image("home_globe")
+                    .resizable()
+                    .rotationEffect(Angle(degrees: -degrees)) // Apply rotation effect
+                    .animation(Animation.linear(duration: 150).repeatForever(autoreverses: false), value: degrees) // Apply animation
+
+                    .onAppear {
+                        degrees = 360
+                    }
     }
 }
 
