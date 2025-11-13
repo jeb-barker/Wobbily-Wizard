@@ -39,6 +39,7 @@ struct ShakeGestureViewModifier: ViewModifier {
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
     @State private var shaken: Int = 0
+    
 
     let items = ["🌻", "🌶️", "🌡️", "🧨", "🔌", "🔋", "⚡", "📱", "🐍", "🧪", "💀", "☢️", "🧊", "🍨", "🥶", "🐧"]
     
