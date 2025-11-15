@@ -27,8 +27,10 @@ struct Shop: View {
                     HStack(spacing: 15) {
                         // Icon
                         Button(action: {
-                            playerData.balance -= item.2
-                            playerData.save()
+                            if (player.balance >= item.2) { 
+                                playerData.balance -= item.2
+                                playerData.save()
+                            }
                         }) {
                             Text(item.0)
                         }.offset(x: -45, y: 205)
