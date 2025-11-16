@@ -50,6 +50,9 @@ struct WizardView: View {
                 }
                 .backgroundStyle(FillShapeStyle())
                 .onAppear{
+                    if(playerData.hasSeenLanding == false){
+                        playerData.addUser()
+                    }
                     playerData.hasSeenLanding = true
                 }
                 .onChange(of: playerData.inventory) { _ in playerData.save() }
