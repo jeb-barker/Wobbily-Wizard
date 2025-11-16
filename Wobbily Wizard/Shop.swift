@@ -27,7 +27,7 @@ struct Shop: View {
                     HStack(spacing: 15) {
                         // Icon
                         Button(action: {
-                            if (player.balance >= item.2) { 
+                            if (playerData.balance >= item.2) {
                                 playerData.balance -= item.2
                                 playerData.save()
                             }

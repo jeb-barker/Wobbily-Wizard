@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Friends: View{
     @EnvironmentObject var playerData: PlayerData
+    @State private var friendCode: String = ""
     var body: some View{
         //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
         let _ = UUID()
@@ -47,6 +48,16 @@ struct Friends: View{
                 }
                     
             }
+            HStack{
+                TextField("Enter UUID here", text: $friendCode)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                Button("Add"){
+                    print("Added!")
+                }
+            }
+            
         }
         
     }
