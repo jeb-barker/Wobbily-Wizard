@@ -7,18 +7,7 @@
 
 import SwiftUI
 
-class currUser: ObservableObject{
-    @Published var currNickname: String
-    @Published var currUUID: UUID
-    init(){
-        self.currNickname = "Enter Nickname"
-        self.currUUID = UUID()
-    }
-}
-
 struct Landing: View{
-    @EnvironmentObject var currUserData: currUser
-    @EnvironmentObject var hasSeenLanding: seenLanding
     @EnvironmentObject var playerData: PlayerData
     //@State var seenLanding: Bool = false
     var body: some View{
@@ -26,16 +15,14 @@ struct Landing: View{
             VStack{
                 Text("Enter a nickname:")
                     .font(.title)
-                TextField("Nickname here", text: $currUserData.currNickname)
+                TextField("Nickname here", text: $playerData.currNickname)
                     //.multilineTextAlignment(.center)
                     .padding(10) 
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                 //call wizardview() from here, similar to in wizardapp
                 //by this point, current user has UUID and nickname
-                NavigationLink("Submit", destination: WizardView()
-                    .environmentObject(currUserData)
-                    .environmentObject(hasSeenLanding))
+                NavigationLink("Submit", destination: WizardView())
                     .environmentObject(playerData)
             }
         }

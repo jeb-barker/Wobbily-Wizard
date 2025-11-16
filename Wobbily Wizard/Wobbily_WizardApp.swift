@@ -22,33 +22,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 }
 
-class seenLanding: ObservableObject{
-    @Published var landing: Bool
-    init(){
-        landing = false
-    }
-}
-
 @main
 struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var currentUser = currUser()
-    @StateObject var hasSeenLanding = seenLanding()
     @StateObject var playerData = PlayerData()
     
     var body: some Scene {
         WindowGroup {
-            if(seenLanding().landing == false){
+            if(playerData.hasSeenLanding == false){
                 Landing()
                     .environmentObject(playerData)
-                    .environmentObject(currentUser)
-                    .environmentObject(hasSeenLanding)
             }
             else{
                 WizardView()
                     .environmentObject(playerData)
-                    .environmentObject(currentUser)
-                    .environmentObject(hasSeenLanding)
             }
         }
     }

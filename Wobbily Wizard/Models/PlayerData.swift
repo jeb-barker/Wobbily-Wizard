@@ -14,6 +14,9 @@ class PlayerData: ObservableObject, Codable {
     // Each potion in list: [type, amount]
     @Published var potions: [InventoryPotion] = []
     @Published var balance: Int = 0
+    @Published var hasSeenLanding: Bool = false
+    @Published var currUUID: UUID = UUID()
+    @Published var currNickname: String = " "
 
     enum CodingKeys: String, CodingKey {
         case inventory, potions, balance
