@@ -87,6 +87,7 @@ struct Cauldren: View {
             Image("cauldron")
                 .resizable()
                 .scaledToFit()
+                .padding(.bottom, 10)
                 .frame(width: 250, height: 150)
                 .onDrop(of: [.text], isTargeted: nil) { providers in
                     for provider in providers {
@@ -104,7 +105,11 @@ struct Cauldren: View {
 
             // Show what’s been dropped
             Text("In The Pot: \(droppedItems.joined(separator: ", "))")
-                .padding(.top, 30)
+                .padding(10)
+                .font(.title3)
+                .background(Color.white)
+                .cornerRadius(10)
+                
             Text("")
                 .onShakeGesture{
                     print("Device is shaking!")
@@ -115,11 +120,19 @@ struct Cauldren: View {
                     
                 }
                 .disabled(droppedItems.isEmpty)
+                .padding(7)
+                .font(.title3)
+                .background(Color.white)
+                .cornerRadius(10)
                 Spacer()
                 Button("Brew"){
                     print("hello world")
                 }
                 .disabled(!checkRecipe(items: droppedItems).0)
+                .padding(7)
+                .font(.title3)
+                .background(Color.white)
+                .cornerRadius(10)
             }
             
         }
