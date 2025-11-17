@@ -24,8 +24,6 @@ struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var itemData = ItemData()
     @EnvironmentObject var playerData: PlayerData
-    @EnvironmentObject var hasSeenLanding: seenLanding
-    @EnvironmentObject var currentuser : currUser
     
     var body: some View {
         NavigationStack {
@@ -52,7 +50,10 @@ struct WizardView: View {
                 }
                 .backgroundStyle(FillShapeStyle())
                 .onAppear{
-                    hasSeenLanding.landing = true
+                    if(playerData.hasSeenLanding == false){
+                        playerData.addUser()
+                    }
+                    playerData.hasSeenLanding = true
                 }
                 .onChange(of: playerData.inventory) { _ in playerData.save() }
                 .onChange(of: playerData.potions) { _ in playerData.save() }
@@ -67,7 +68,5 @@ struct WizardView: View {
 
 #Preview {
     WizardView()
-        .environmentObject(currUser())
-        .environmentObject(seenLanding())
         .environmentObject(PlayerData())
 }

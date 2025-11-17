@@ -6,6 +6,7 @@
 //
 import Combine
 import SwiftUI
+import Firebase
 
 // Observable object with the data for the player
 class PlayerData: ObservableObject, Codable {
@@ -14,6 +15,22 @@ class PlayerData: ObservableObject, Codable {
     // Each potion in list: [type, amount]
     @Published var potions: [InventoryPotion] = []
     @Published var balance: Int = 0
+    @Published var hasSeenLanding: Bool = false
+    @Published var currUUID: UUID = UUID()
+    @Published var currNickname: String = " "
+    //array of dictionaries for friends
+    @Published var friendsList: [[String: Any]] = []
+    /* TEST DUMMY DATA TO TEST IF FIREBASE WOULD CONVERT ARRAY OF DICTS TO MAP ARRAY OF MAP TYPES
+    @Published var friendsListDUMMY: [[String : Any]] = [
+        ["friend" : "1234567890", "isSendingPotion" : false, "relationship": 0],
+        ["friend" : "4567890123", "isSendingPotion" : false,"relationship" : 10]
+    ]
+     */
+    //String of UUID of the person its sent to
+    @Published var hasRecievedPotion: String = ""
+    //String of UUID of the person its sent to
+    @Published var hasSentPotion: String = ""
+    
 
     enum CodingKeys: String, CodingKey {
         case inventory, potions, balance
@@ -33,6 +50,25 @@ class PlayerData: ObservableObject, Codable {
         try container.encode(inventory, forKey: .inventory)
         try container.encode(potions, forKey: .potions)
         try container.encode(balance, forKey: .balance)
+    }
+    
+    private var db = Firestore.firestore()
+    
+    //add user to firebase
+    
+    func addUser(){
+        do{
+            let _ = try db.collection("users").addDocument(data:[
+                "UUID" : currUUID.uuidString,
+                "friends" : friendsListDUMMY,
+                "nickname" : currNickname,
+                "recieve_potion" : hasRecievedPotion,
+                "sent_potion" : hasSentPotion
+            ])
+        }
+        catch{
+            print("error")
+        }
     }
 
     // Load data from file or create defaults
