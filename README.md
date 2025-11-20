@@ -10,7 +10,7 @@ The main goal of the game is to brew potions, walk to an evil wizard, and defeat
 
 ## Details
 ### Landing Screen
-The first time a user opens the app they are prompted to input a nickname.
+The first time a user opens the app, they are prompted to input a nickname. This then creates a new user in the firebase database!
 
 ### Home
 The Home screen is the main tab of the app.
