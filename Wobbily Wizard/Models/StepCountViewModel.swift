@@ -81,6 +81,25 @@ final class StepCountViewModel: ObservableObject, Codable {
         case stepGoal
     }
     
+    // Path for saving data to device
+    static private var saveURL: URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0].appendingPathComponent("stepModel.json")
+    }
+
+    // Saving and loading the file
+    func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            try? encoded.write(to: Self.saveURL)
+        }
+    }
+
+    // Load from device if possible
+    static func load() -> StepCountViewModel? {
+        guard let data = try? Data(contentsOf: saveURL) else { return nil }
+        return try? JSONDecoder().decode(StepCountViewModel.self, from: data)
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         //When we decode, we store the previous step count into storedSteps
