@@ -107,7 +107,7 @@ class PlayerData: ObservableObject, Codable {
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
             self.inventory = [
-                InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vile", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
+                InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vial", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
             ]
             self.potions = [InventoryPotion("fire", 1), InventoryPotion("electric", 4), InventoryPotion("poison", 0), InventoryPotion("ice", 2)]
             self.balance = 500
