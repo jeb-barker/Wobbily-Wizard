@@ -12,7 +12,7 @@ import SpriteKit
 
 struct Home: View {
     @State private var total : Double = 0.1
-    @StateObject private var stepCountModel = StepCountViewModel();
+    @EnvironmentObject private var stepCountModel : StepCountViewModel
     
     @EnvironmentObject private var playerData : PlayerData
     

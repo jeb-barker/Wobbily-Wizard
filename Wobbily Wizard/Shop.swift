@@ -35,7 +35,7 @@ struct Shop: View {
                                     }
                                 }
                                 playerData.save()
-                                
+                                print(playerData.printPretty())
                             }
                         }) {
                             Text(item.0)

@@ -26,7 +26,14 @@ final class StepCountViewModel: ObservableObject, Codable {
     private var storedSteps : Double = 0.0
     
     init() {
-        stepManager = StepManager(0)
+        if let saved = StepCountViewModel.load() {
+            self.storedSteps = saved.storedSteps
+            self.stepManager = StepManager(self.storedSteps)
+        }
+        else {
+            stepManager = StepManager(0)
+        }
+        
     }
     
     func requestAuth() async {
