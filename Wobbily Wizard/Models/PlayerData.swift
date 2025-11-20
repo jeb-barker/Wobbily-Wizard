@@ -72,29 +72,30 @@ class PlayerData: ObservableObject, Codable {
         }
     }
     
-    func fetchDataWithField(field: String, value: String) -> [Any] {
+    func fetchDataWithField(field: String, value: String) async -> [Any] {
         var arr: [Any] = []
-        db.collection("users")
-                .whereField(field, isEqualTo: value)
-                .getDocuments { (querySnapshot, error) in
-                    if let error = error {
-                        print("Error getting documents: \(error)")
-                    } else {
-                        for document in querySnapshot!.documents {
-                            print("-------------------------")
-                            print("\(document.documentID) => \(document.data())")
-                            print(document.data()["UUID"]! as! String)
-                            print("~~~~~~")
-                            arr.append(document.data()["UUID"]! as! String)
-                            arr.append(document.data()["nickname"]! as! String)
-                            arr.append(document.data()["friends"]! as! [[String:Any]])
-                            arr.append(document.data()["recieve_potion"]! as! String)
-                            arr.append(document.data()["sent_potion"]! as! String)
-                            
-                        }
-                    }
+        do {
+            let result = try await db.collection("users")
+                    .whereField(field, isEqualTo: value)
+                    .getDocuments()
+            
+            for document in result.documents {
+                print("-------------------------")
+                print("\(document.documentID) => \(document.data())")
+                print(document.data()["UUID"]! as! String)
+                print("~~~~~~")
+                arr.append(document.data()["UUID"]! as! String)
+                arr.append(document.data()["nickname"]! as! String)
+                arr.append(document.data()["friends"]! as! [[String:Any]])
+                arr.append(document.data()["recieve_potion"]! as! String)
+                arr.append(document.data()["sent_potion"]! as! String)
             }
-        return arr
+            return arr
+        } catch {
+            print("error")
+        }
+        
+        return []
     }
 
     // Load data from file or create defaults
