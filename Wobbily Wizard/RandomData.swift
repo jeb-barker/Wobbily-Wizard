@@ -22,7 +22,7 @@ class ItemData: ObservableObject {
     // (componant, name, price, type)
     let allItems = [("🌻", "Sunflower", 20, "fire"), ("🌶️", "Hot Pepper", 40, "fire"), ("🌡️", "Thermometer", 60, "fire"), ("🧨", "Fire Cracker", 80, "fire"),
                     ("🔌", "Cable", 20, "electric"), ("🔋", "Battery", 40, "electric"), ("⚡", "Lightning", 60, "electric"), ("📱", "Device", 80, "electric"),
-                    ("🐍", "Snake", 20, "poison"), ("🧪", "Vile", 40, "poison"), ("💀", "Skull", 60, "poison"), ("☢️", "Nuclear Waste", 80, "poison"),
+                    ("🐍", "Snake", 20, "poison"), ("🧪", "Vial", 40, "poison"), ("💀", "Skull", 60, "poison"), ("☢️", "Nuclear Waste", 80, "poison"),
                     ("🧊", "Ice Cube", 20, "ice"), ("🍨", "Ice Cream", 40, "ice"), ("🥶", "Frozen Fred", 60, "ice"), ("🐧", "Penguin", 80, "ice")]
     
     @Published var currentShop: [(component: String, name: String, cost: Int, type: String)]
