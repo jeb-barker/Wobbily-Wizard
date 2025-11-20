@@ -60,7 +60,7 @@ class PlayerData: ObservableObject, Codable {
         do{
             let _ = try db.collection("users").addDocument(data:[
                 "UUID" : currUUID.uuidString,
-                "friends" : friendsListDUMMY,
+                "friends" : friendsList,
                 "nickname" : currNickname,
                 "recieve_potion" : hasRecievedPotion,
                 "sent_potion" : hasSentPotion
