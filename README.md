@@ -9,7 +9,7 @@ The main goal of the game is to brew potions, walk to an evil wizard, and defeat
 > After meeting the step goal, the user can choose to fight the evil wizard, using the potions they brewed to defeat him.
 
 ## Details
-### Nickname Screen
+### Landing Screen
 The first time a user opens the app they are prompted to input a nickname.
 
 ### Home
@@ -36,7 +36,7 @@ Currently, the shop functions are not fully finished but the background is set u
 <br clear="left"/>
 
 ### Friends
-A friends section was added which automatically makes rectangles that contain a user’s nickname and their corresponding UID. 
+A friends section was added which automatically makes rectangles that contain a user’s nickname and their corresponding UID taken from a firebase database. 
 <br><img align="left" src="/screenshots/Home.png" width="200"> 
 Ideally, a backend would exist that stores a list of user objects that contains their nickname and UID, and the friends view would pull from there, but for now it is hardcoded.
 
