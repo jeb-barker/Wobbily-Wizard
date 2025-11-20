@@ -29,6 +29,11 @@ struct Shop: View {
                         Button(action: {
                             if (playerData.balance >= item.2) {
                                 playerData.balance -= item.2
+                                for (i in playerData.inventory) {
+                                    if (playerData.inventory.name == item.1) {
+                                        playerData.inventory.amount = playerData.inventory.amount + 1
+                                    }
+                                }
                                 playerData.save()
                             }
                         }) {
