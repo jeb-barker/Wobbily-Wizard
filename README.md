@@ -14,7 +14,7 @@ The first time a user opens the app they are prompted to input a nickname.
 
 ### Home
 The Home screen is the main tab of the app. It shows the user's progress towards their step goal, and shows the most recent number of steps taken.
-![Home](/screenshots/Home.png")
+![Home](/screenshots/Home.png)
 
 A friends section was added which automatically makes rectangles that contain a user’s nickname and their corresponding UID. Ideally, a backend would exist that stores a list of user objects that contains their nickname and UID, and the friends view would pull from there, but for now it is hardcoded.
 
