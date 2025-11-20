@@ -7,6 +7,7 @@
 import Combine
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 // Observable object with the data for the player
 class PlayerData: ObservableObject, Codable {
@@ -60,7 +61,7 @@ class PlayerData: ObservableObject, Codable {
         do{
             let _ = try db.collection("users").addDocument(data:[
                 "UUID" : currUUID.uuidString,
-                "friends" : friendsListDUMMY,
+                "friends" : friendsList,
                 "nickname" : currNickname,
                 "recieve_potion" : hasRecievedPotion,
                 "sent_potion" : hasSentPotion
@@ -69,6 +70,31 @@ class PlayerData: ObservableObject, Codable {
         catch{
             print("error")
         }
+    }
+    
+    func fetchDataWithField(field: String, value: String) -> [Any] {
+        var arr: [Any] = []
+        db.collection("users")
+                .whereField(field, isEqualTo: value)
+                .getDocuments { (querySnapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            print("-------------------------")
+                            print("\(document.documentID) => \(document.data())")
+                            print(document.data()["UUID"]! as! String)
+                            print("~~~~~~")
+                            arr.append(document.data()["UUID"]! as! String)
+                            arr.append(document.data()["nickname"]! as! String)
+                            arr.append(document.data()["friends"]! as! [[String:Any]])
+                            arr.append(document.data()["recieve_potion"]! as! String)
+                            arr.append(document.data()["sent_potion"]! as! String)
+                            
+                        }
+                    }
+            }
+        return arr
     }
 
     // Load data from file or create defaults
@@ -105,4 +131,5 @@ class PlayerData: ObservableObject, Codable {
         guard let data = try? Data(contentsOf: saveURL) else { return nil }
         return try? JSONDecoder().decode(PlayerData.self, from: data)
     }
+
 }

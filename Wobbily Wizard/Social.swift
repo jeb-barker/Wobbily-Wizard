@@ -55,6 +55,9 @@ struct Friends: View{
                     .cornerRadius(8)
                 Button("Add"){
                     print("Added!")
+                    print(playerData.fetchDataWithField(field: "UUID", value: "7D46C9DB-64E1-4395-8CAD-DEA4A65A1B3F"))
+                    
+                    print("???????????")
                 }
             }
             
