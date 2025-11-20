@@ -36,9 +36,9 @@ Currently, the shop functions are not fully finished but the background is set u
 <br clear="left"/>
 
 ### Friends
-A friends section was added which automatically makes rectangles that contain a user’s nickname and their corresponding UID taken from a firebase database. 
+The friends screen showcases friends that you can add. After submitting the UUID of your friend in the textfield at the bottom of the screen, it adds a rectangle that displays their nickname and UUID. There is a button next to their name that will send them a potion that they can use in battle once a day.
 <br><img align="left" src="/screenshots/Home.png" width="200"> 
-Ideally, a backend would exist that stores a list of user objects that contains their nickname and UID, and the friends view would pull from there, but for now it is hardcoded.
+ 
 
 <br clear="left"/>
 
