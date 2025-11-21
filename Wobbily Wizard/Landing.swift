@@ -25,6 +25,7 @@ struct Landing: View{
                 //by this point, current user has UUID and nickname
                 NavigationLink("Submit", destination: WizardView())
                     .environmentObject(playerData)
+                    .environmentObject(stepModel)
                     .disabled(playerData.currNickname.isEmpty)
                 
             }
