@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Landing: View{
     @EnvironmentObject var playerData: PlayerData
-    //@State var seenLanding: Bool = false
     var body: some View{
         NavigationStack{
             VStack{
@@ -24,6 +23,8 @@ struct Landing: View{
                 //by this point, current user has UUID and nickname
                 NavigationLink("Submit", destination: WizardView())
                     .environmentObject(playerData)
+                    .disabled(playerData.currNickname.isEmpty)
+                
             }
         }
     }
