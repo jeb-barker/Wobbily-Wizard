@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Landing: View{
     @EnvironmentObject var playerData: PlayerData
+    @EnvironmentObject var stepModel: StepCountViewModel
+    //@State var seenLanding: Bool = false
     var body: some View{
         NavigationStack{
             VStack{

@@ -30,16 +30,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Wobbily_WizardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var playerData = PlayerData()
+    @StateObject var stepModel = StepCountViewModel()
     
     var body: some Scene {
         WindowGroup {
             if(playerData.hasSeenLanding == false){
                 Landing()
                     .environmentObject(playerData)
+                    .environmentObject(stepModel)
             }
             else{
                 WizardView()
                     .environmentObject(playerData)
+                    .environmentObject(stepModel)
             }
         }
     }

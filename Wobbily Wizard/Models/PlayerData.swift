@@ -157,5 +157,14 @@ class PlayerData: ObservableObject, Codable {
         guard let data = try? Data(contentsOf: saveURL) else { return nil }
         return try? JSONDecoder().decode(PlayerData.self, from: data)
     }
+    
+    //pretty print
+    func printPretty() {
+        for item in inventory {
+            if item.amount > 0 {
+                print("\(item.amount) \(item.name)")
+            }
+        }
+    }
 
 }

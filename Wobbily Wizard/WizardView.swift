@@ -24,6 +24,7 @@ struct WizardView: View {
     @State private var currentView : Screen = .home
     @StateObject var itemData = ItemData()
     @EnvironmentObject var playerData: PlayerData
+    @EnvironmentObject var stepModel: StepCountViewModel
     
     var body: some View {
         NavigationStack {
@@ -35,6 +36,7 @@ struct WizardView: View {
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.white, for: .tabBar)
                     .environmentObject(playerData)
+                    .environmentObject(stepModel)
                     Cauldren().tabItem {
                         Label("Cauldron", systemImage: "wand.and.stars")
                     }
@@ -62,6 +64,8 @@ struct WizardView: View {
             }
             
             
+        }.onDisappear() {
+            stepModel.save()
         }
     }
 }
