@@ -70,6 +70,8 @@ struct Friends: View{
                                 listOfFriends.append(temp)
                             }
                             playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "isSendingPotion" : false, "relationship" : 0], uuid: playerData.currUUID.uuidString)
+                            friendCode = ""
+                            
                         }
                     }
                     
