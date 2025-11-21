@@ -62,7 +62,7 @@ struct Friends: View{
                             //prevent repeat friends
                             var preventAppend = false
                             for i in listOfFriends {
-                                if i["uuid"] == temp["uuid"]{
+                                if i["uuid"] == temp["uuid"] || temp["uuid"] == playerData.currUUID.uuidString {
                                     preventAppend = true
                                 }
                             }

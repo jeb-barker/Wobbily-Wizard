@@ -62,10 +62,10 @@ class PlayerData: ObservableObject, Codable {
         do{
             let _ = try db.collection("users").addDocument(data:[
                 "UUID" : currUUID.uuidString,
-                "friends" : friendsList,
                 "nickname" : currNickname,
+                "friends" : friendsList,
                 "recieve_potion" : hasRecievedPotion,
-                "sent_potion" : hasSentPotion
+                "sent_potion" : hasSentPotion,
             ])
         }
         catch{
