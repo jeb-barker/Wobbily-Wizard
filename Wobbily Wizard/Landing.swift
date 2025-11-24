@@ -27,6 +27,7 @@ struct Landing: View{
                     .environmentObject(playerData)
                     .environmentObject(stepModel)
                     .disabled(playerData.currNickname.isEmpty)
+                    .disabled(playerData.currNickname.count > 10)
                 
             }
         }
