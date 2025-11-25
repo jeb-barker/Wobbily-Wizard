@@ -39,13 +39,15 @@ struct Shop: View {
                             }
                         }) {
                             Text(item.0)
-                        }.offset(x: -45, y: 205)
+                        }.offset(x: -33, y: 205)
                         // Name
                         Text(item.1)
-                            .frame(width: 120, alignment: .leading)
-                            .offset(x: -45, y: 205)
+                            .frame(width: 105, alignment: .leading)
+                            .offset(x: -35, y: 205)
+                            .font(.system(size: 15))
                         // Cost
-                        Text("💎 \(item.2)").offset(x: -45, y: 205)
+                        Text("Cost: 💎 \(item.2)").offset(x: -15, y: 205)
+    
                     }
                 }
             }
