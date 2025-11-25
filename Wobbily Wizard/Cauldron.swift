@@ -38,34 +38,65 @@ struct ShakeGestureViewModifier: ViewModifier {
 }
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
-    @State private var shaken: Int = 0
+    @State private var showMissingItemAlert = false
+    @State private var showPotionBrewedAlert = false
+    @State private var missingItemName = ""
+    @State private var brewPotionType = ""
+    @State private var shakeCount = 0
+    @State private var cauldronImage = "cauldron"
+    
+    @EnvironmentObject var playerData: PlayerData
     
 
     let items = ["🌻", "🌶️", "🌡️", "🧨", "🔌", "🔋", "⚡", "📱", "🐍", "🧪", "💀", "☢️", "🧊", "🍨", "🥶", "🐧"]
     
-    func checkRecipe(items: [String]) -> (Bool, String){
+    func checkRecipe(items: [String]) -> Bool{
         var valid_potion = false
-        var type = "None"
         if items == ["🌻", "🌶️", "🌡️", "🧨"] {
             valid_potion = true
-            type = "Fire"
+            brewPotionType = "Fire"
         }
         else if items == ["🔌", "🔋", "⚡", "📱"] {
             valid_potion = true
-            type = "Lightning"
+            brewPotionType = "Electric"
         }
         else if items == ["🐍", "🧪", "💀", "☢️"] {
             valid_potion = true
-            type = "Poison"
+            brewPotionType = "Poison"
         }
         else if items == ["🧊", "🍨", "🥶", "🐧"] {
             valid_potion = true
-            type = "Ice"
+            brewPotionType = "Ice"
         }
-        return (valid_potion, type)
+        return valid_potion
     }
     func reset_pot() -> [String]{
         return []
+    }
+    func inInventory(item:String) -> Bool{
+        // loop through player data to find the item
+        for inventoryItem in playerData.inventory {
+            if inventoryItem.name == item {
+                if inventoryItem.amount > 0 {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    func brewPotion(){
+        shakeCount = 0
+        while shakeCount < 10 {
+            if shakeCount % 2 == 0 {
+                cauldronImage = "shaking_1"
+            }
+            else {
+                cauldronImage = "shaking_2"
+            }
+        }
+        cauldronImage = "cauldron"
+        showPotionBrewedAlert = true
+        droppedItems = reset_pot()
     }
     var body: some View {
         VStack {
@@ -84,7 +115,7 @@ struct Cauldren: View {
             Spacer()
             
             // Drop target (the cauldron)
-            Image("cauldron")
+            Image(cauldronImage)
                 .resizable()
                 .scaledToFit()
                 .padding(.bottom, 10)
@@ -94,8 +125,13 @@ struct Cauldren: View {
                         _ = provider.loadObject(ofClass: String.self) { (string, _) in
                             if let item = string {
                                 DispatchQueue.main.async {
-                                    // if item is in the inventory
-                                    droppedItems.append(item)
+                                    if(inInventory(item: item)){
+                                        droppedItems.append(item)
+                                    }
+                                    else{
+                                        missingItemName = item
+                                        showMissingItemAlert = true
+                                    }
                                 }
                             }
                         }
@@ -112,7 +148,7 @@ struct Cauldren: View {
                 
             Text("")
                 .onShakeGesture{
-                    print("Device is shaking!")
+                    shakeCount += 1
                 }
             HStack{
                 Button("Reset"){
@@ -126,9 +162,9 @@ struct Cauldren: View {
                 .cornerRadius(10)
                 Spacer()
                 Button("Brew"){
-                    print("hello world")
+                    brewPotion()
                 }
-                .disabled(!checkRecipe(items: droppedItems).0)
+                .disabled(!checkRecipe(items: droppedItems))
                 .padding(7)
                 .font(.title3)
                 .background(Color.white)
@@ -142,10 +178,22 @@ struct Cauldren: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-                .offset(x: -80)
+                .offset(x: -170)
         )
+        .alert("Item Missing",
+               isPresented: $showMissingItemAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Nope — you don't have \(missingItemName) in your inventory.")
+        }
+        .alert("Potion Brewed",
+               isPresented: $showPotionBrewedAlert) {
+            Button("OK", role: .cancel){ }
+        } message: {
+            Text("You have successfully brewed \(brewPotionType)! It is now in your inventory.")
+        }
     }
 }
 #Preview {
-    Cauldren()
+    Cauldren().environmentObject(PlayerData())
 }
