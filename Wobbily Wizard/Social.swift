@@ -42,6 +42,14 @@ struct Friends: View{
                                         .padding(.leading, 10)
                                         .font(.largeTitle)
                                         .fontWeight(.semibold)
+                                    Button(action: {
+
+                                                print("potion sent!")
+                                            }) {
+                                                Label("", systemImage: "paperplane")
+                                            }
+                                            .offset(x: 120)
+                                            .font(.largeTitle)
                                         
                                 }
                                 Text(i["uuid"]!)
