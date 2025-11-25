@@ -18,9 +18,9 @@ class PlayerData: ObservableObject, Codable {
     @Published var balance: Int = 0
     @Published var hasSeenLanding: Bool = false
     @Published var currUUID: UUID = UUID()
-    @Published var currNickname: String = " "
+    @Published var currNickname: String = ""
     //array of dictionaries for friends
-    @Published var friendsList: [[String: Any]] = []
+    @Published var friendsList: [[String: Any]] = [["  ": " "]]
     /* TEST DUMMY DATA TO TEST IF FIREBASE WOULD CONVERT ARRAY OF DICTS TO MAP ARRAY OF MAP TYPES
     @Published var friendsListDUMMY: [[String : Any]] = [
         ["friend" : "1234567890", "isSendingPotion" : false, "relationship": 0],
@@ -31,6 +31,7 @@ class PlayerData: ObservableObject, Codable {
     @Published var hasRecievedPotion: String = ""
     //String of UUID of the person its sent to
     @Published var hasSentPotion: String = ""
+    @Published var documentId: String = ""
     
 
     enum CodingKeys: String, CodingKey {
@@ -61,10 +62,10 @@ class PlayerData: ObservableObject, Codable {
         do{
             let _ = try db.collection("users").addDocument(data:[
                 "UUID" : currUUID.uuidString,
-                "friends" : friendsList,
                 "nickname" : currNickname,
+                "friends" : friendsList,
                 "recieve_potion" : hasRecievedPotion,
-                "sent_potion" : hasSentPotion
+                "sent_potion" : hasSentPotion,
             ])
         }
         catch{
@@ -80,10 +81,8 @@ class PlayerData: ObservableObject, Codable {
                     .getDocuments()
             
             for document in result.documents {
-                print("-------------------------")
                 print("\(document.documentID) => \(document.data())")
                 print(document.data()["UUID"]! as! String)
-                print("~~~~~~")
                 arr.append(document.data()["UUID"]! as! String)
                 arr.append(document.data()["nickname"]! as! String)
                 arr.append(document.data()["friends"]! as! [[String:Any]])
@@ -97,6 +96,31 @@ class PlayerData: ObservableObject, Codable {
         
         return []
     }
+    
+    func updateData(field: String, value: Any, uuid: String) {
+        let users = self.db.collection("users") //self.db points to *my* firestore
+            users.whereField("UUID", isEqualTo: uuid).limit(to: 1).getDocuments(completion: { querySnapshot, error in
+                if let err = error {
+                    print("error")
+                    return
+                }
+
+                guard let docs = querySnapshot?.documents else { return }
+
+                for doc in docs {
+                    let ref = doc.reference
+                    if(field == "friends"){
+                        ref.updateData([
+                            field : FieldValue.arrayUnion([value])
+                        ])
+                    }
+                    else{
+                        ref.updateData([field: value])
+                    }
+                }
+            })
+    
+    }
 
     // Load data from file or create defaults
     init() {
@@ -107,12 +131,13 @@ class PlayerData: ObservableObject, Codable {
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
             self.inventory = [
-                InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vile", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
+                InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vial", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
             ]
             self.potions = [InventoryPotion("fire", 1), InventoryPotion("electric", 4), InventoryPotion("poison", 0), InventoryPotion("ice", 2)]
             self.balance = 500
         }
     }
+    
 
     // Path for saving data to device
     static private var saveURL: URL {
@@ -131,6 +156,15 @@ class PlayerData: ObservableObject, Codable {
     static func load() -> PlayerData? {
         guard let data = try? Data(contentsOf: saveURL) else { return nil }
         return try? JSONDecoder().decode(PlayerData.self, from: data)
+    }
+    
+    //pretty print
+    func printPretty() {
+        for item in inventory {
+            if item.amount > 0 {
+                print("\(item.amount) \(item.name)")
+            }
+        }
     }
 
 }

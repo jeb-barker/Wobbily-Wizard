@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Landing: View{
     @EnvironmentObject var playerData: PlayerData
+    @EnvironmentObject var stepModel: StepCountViewModel
     //@State var seenLanding: Bool = false
     var body: some View{
         NavigationStack{
@@ -24,6 +25,10 @@ struct Landing: View{
                 //by this point, current user has UUID and nickname
                 NavigationLink("Submit", destination: WizardView())
                     .environmentObject(playerData)
+                    .environmentObject(stepModel)
+                    .disabled(playerData.currNickname.isEmpty)
+                    .disabled(playerData.currNickname.count > 10)
+                
             }
         }
     }

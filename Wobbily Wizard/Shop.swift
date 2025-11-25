@@ -29,15 +29,25 @@ struct Shop: View {
                         Button(action: {
                             if (playerData.balance >= item.2) {
                                 playerData.balance -= item.2
+                                for i in playerData.inventory {
+                                    if (i.name == item.1) {
+                                        i.amount = i.amount + 1
+                                    }
+                                }
                                 playerData.save()
+                                print(playerData.printPretty())
                             }
                         }) {
                             Text(item.0)
-                        }.offset(x: -45, y: 205)
+                        }.offset(x: -33, y: 205)
                         // Name
-                        Text(item.1).offset(x: -45, y: 205)
+                        Text(item.1)
+                            .frame(width: 105, alignment: .leading)
+                            .offset(x: -35, y: 205)
+                            .font(.system(size: 15))
                         // Cost
-                        Text("💎 \(item.2)").offset(x: -45, y: 205)
+                        Text("Cost: 💎 \(item.2)").offset(x: -15, y: 205)
+    
                     }
                 }
             }
