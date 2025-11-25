@@ -41,7 +41,9 @@ struct Shop: View {
                             Text(item.0)
                         }.offset(x: -45, y: 205)
                         // Name
-                        Text(item.1).offset(x: -45, y: 205)
+                        Text(item.1)
+                            .frame(width: 120, alignment: .leading)
+                            .offset(x: -45, y: 205)
                         // Cost
                         Text("💎 \(item.2)").offset(x: -45, y: 205)
                     }
