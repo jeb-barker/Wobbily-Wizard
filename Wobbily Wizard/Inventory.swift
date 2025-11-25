@@ -7,3 +7,13 @@
 
 import SwiftUI
 
+struct Inventory: View {
+    
+    var body: some View {
+        Text("Inventory")
+    }
+}
+
+#Preview {
+    Inventory()
+}

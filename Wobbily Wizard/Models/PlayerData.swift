@@ -56,6 +56,22 @@ class PlayerData: ObservableObject, Codable {
     
     private var db = Firestore.firestore()
     
+    // remove item from the inventory
+    func decreaseItem(_ name: String) {
+        if let index = inventory.firstIndex(where: { $0.name == name }) {
+            if inventory[index].amount > 0 {
+                inventory[index].amount -= 1
+                save()   // optional but recommended so it persists
+            }
+        }
+    }
+    // add item to inventory
+    func addItem(_ name: String) {
+        if let index = inventory.firstIndex(where: { $0.name == name }) {
+            inventory[index].amount += 1
+            save()   // keep data persistent
+        }
+    }
     //add user to firebase
     
     func addUser(){
