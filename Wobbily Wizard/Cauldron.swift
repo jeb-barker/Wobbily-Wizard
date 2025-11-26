@@ -87,6 +87,14 @@ struct Cauldren: View {
         // Final animation
         cauldronImage = "shaking_1"
         showShakeCount = true
+        
+        // Add potion to player inventory
+        for potion in playerData.potions {
+            if potion.potionType.description == brewPotionType.lowercased() {
+                // add another potion
+                potion.amount += 1
+            }
+        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             cauldronImage = "shaking_2"
@@ -96,7 +104,10 @@ struct Cauldren: View {
             cauldronImage = "cauldron"
             
             showPotionBrewedAlert = true
-            reset_pot()
+            
+            // resetting the pot also adds items back into the inventory
+            // instead, just clear the dropped items
+            droppedItems.removeAll()
             
             shakeCount = 0   // Reset for next brew
             showShakeCount = false
