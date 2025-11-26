@@ -26,6 +26,7 @@ struct WizardView: View {
     @EnvironmentObject var playerData: PlayerData
     @EnvironmentObject var stepModel: StepCountViewModel
     
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -57,9 +58,9 @@ struct WizardView: View {
                     }
                     playerData.hasSeenLanding = true
                 }
-                .onChange(of: playerData.inventory) { _ in playerData.save() }
-                .onChange(of: playerData.potions) { _ in playerData.save() }
-                .onChange(of: playerData.balance) { _ in playerData.save() }
+                .onChange(of: playerData.inventory) { _, _ in playerData.save() }
+                .onChange(of: playerData.potions) { _, _ in playerData.save() }
+                .onChange(of: playerData.balance) { _, _ in playerData.save() }
                 .navigationBarBackButtonHidden(true)
             }
             
@@ -73,4 +74,5 @@ struct WizardView: View {
 #Preview {
     WizardView()
         .environmentObject(PlayerData())
+        .environmentObject(StepCountViewModel())
 }

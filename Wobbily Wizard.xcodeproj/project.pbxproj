@@ -52,6 +52,8 @@
 		8DBB8EC92EC277F80037A42D /* EvilWizardTauntScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */; };
 		8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */; };
 		8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77B072EB2B2B3006D0A0F /* Fight.swift */; };
+		B520D8B52ED0D05A00D160A8 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520D8B42ED0D05300D160A8 /* Inventory.swift */; };
+		B520D8B92ED79D6800D160A8 /* ShakeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520D8B82ED79D6400D160A8 /* ShakeHelper.swift */; };
 		B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56866772EBE961D00AEF28F /* Cauldron.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		8DBB8EC82EC277F30037A42D /* EvilWizardTauntScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardTauntScene.swift; sourceTree = "<group>"; };
 		8DBB8ECA2EC3DC210037A42D /* EvilWizardFightScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilWizardFightScene.swift; sourceTree = "<group>"; };
 		8DF77B072EB2B2B3006D0A0F /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
+		B520D8B42ED0D05300D160A8 /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		B520D8B82ED79D6400D160A8 /* ShakeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeHelper.swift; sourceTree = "<group>"; };
 		B568666D2EBE8C0500AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 		B56866772EBE961D00AEF28F /* Cauldron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cauldron.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +178,7 @@
 		8D048A4F2E959FB8004CC42A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B520D8B42ED0D05300D160A8 /* Inventory.swift */,
 				B56866772EBE961D00AEF28F /* Cauldron.swift */,
 				8DB17E192EBA9D2C00E0A61B /* Landing.swift */,
 				8DF77B072EB2B2B3006D0A0F /* Fight.swift */,
@@ -198,6 +203,7 @@
 		8DBB8EBE2EBD6C3C0037A42D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B520D8B82ED79D6400D160A8 /* ShakeHelper.swift */,
 				8DB17E172EBA93E400E0A61B /* FightModel.swift */,
 				8D048A742EA3BD31004CC42A /* StepCountViewModel.swift */,
 				8D30B4472EB29B8200281F08 /* StepManager.swift */,
@@ -306,7 +312,9 @@
 				8D30B4482EB29B8200281F08 /* StepManager.swift in Sources */,
 				8DBB8EC72EC01E790037A42D /* PlayerData.swift in Sources */,
 				3E0597F82EA6BFE1004C3169 /* Wobbily_WizardApp.swift in Sources */,
+				B520D8B92ED79D6800D160A8 /* ShakeHelper.swift in Sources */,
 				8DB17E162EBA7C5300E0A61B /* FightScreenScene.swift in Sources */,
+				B520D8B52ED0D05A00D160A8 /* Inventory.swift in Sources */,
 				B56866782EBE961F00AEF28F /* Cauldron.swift in Sources */,
 				8DBB8ECB2EC3DC270037A42D /* EvilWizardFightScene.swift in Sources */,
 				8DF77B082EB2B2BE006D0A0F /* Fight.swift in Sources */,
@@ -453,7 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = B974UN6V32;
+				DEVELOPMENT_TEAM = 324Y6D3P55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -470,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jebarker.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akulcsar.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -489,7 +497,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wobbily Wizard/Preview Content\"";
-				DEVELOPMENT_TEAM = B974UN6V32;
+				DEVELOPMENT_TEAM = 324Y6D3P55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Wobbily-Wizard-Info.plist";
@@ -506,7 +514,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jebarker.Wobbily-Wizard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akulcsar.Wobbily-Wizard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

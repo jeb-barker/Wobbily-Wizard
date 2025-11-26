@@ -24,6 +24,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
   }
 
+    func application(_ application: UIApplication,
+                         configurationForConnecting connectingSceneSession: UISceneSession,
+                         options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+
+            let config = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+
+            // Tell iOS to use our SceneDelegate
+            config.delegateClass = SceneDelegate.self
+            return config
+        }
+
 }
 
 @main
@@ -34,15 +45,17 @@ struct Wobbily_WizardApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if(playerData.hasSeenLanding == false){
-                Landing()
-                    .environmentObject(playerData)
-                    .environmentObject(stepModel)
-            }
-            else{
-                WizardView()
-                    .environmentObject(playerData)
-                    .environmentObject(stepModel)
+            ZStack{
+                if(playerData.hasSeenLanding == false){
+                    Landing()
+                        .environmentObject(playerData)
+                        .environmentObject(stepModel)
+                }
+                else{
+                    WizardView()
+                        .environmentObject(playerData)
+                        .environmentObject(stepModel)
+                }
             }
         }
     }

@@ -26,6 +26,9 @@ struct Landing: View{
                 NavigationLink("Submit", destination: WizardView())
                     .environmentObject(playerData)
                     .environmentObject(stepModel)
+                    .disabled(playerData.currNickname.isEmpty)
+                    .disabled(playerData.currNickname.count > 10)
+                
             }
         }
     }

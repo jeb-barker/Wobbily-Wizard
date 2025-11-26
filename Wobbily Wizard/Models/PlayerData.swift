@@ -18,9 +18,9 @@ class PlayerData: ObservableObject, Codable {
     @Published var balance: Int = 0
     @Published var hasSeenLanding: Bool = false
     @Published var currUUID: UUID = UUID()
-    @Published var currNickname: String = " "
+    @Published var currNickname: String = ""
     //array of dictionaries for friends
-    @Published var friendsList: [[String: Any]] = []
+    @Published var friendsList: [[String: Any]] = [["  ": " "]]
     /* TEST DUMMY DATA TO TEST IF FIREBASE WOULD CONVERT ARRAY OF DICTS TO MAP ARRAY OF MAP TYPES
     @Published var friendsListDUMMY: [[String : Any]] = [
         ["friend" : "1234567890", "isSendingPotion" : false, "relationship": 0],
@@ -31,6 +31,7 @@ class PlayerData: ObservableObject, Codable {
     @Published var hasRecievedPotion: String = ""
     //String of UUID of the person its sent to
     @Published var hasSentPotion: String = ""
+    @Published var documentId: String = ""
     
 
     enum CodingKeys: String, CodingKey {
@@ -55,16 +56,32 @@ class PlayerData: ObservableObject, Codable {
     
     private var db = Firestore.firestore()
     
+    // remove item from the inventory
+    func decreaseItem(_ name: String) {
+        if let index = inventory.firstIndex(where: { $0.name == name }) {
+            if inventory[index].amount > 0 {
+                inventory[index].amount -= 1
+                save()   // optional but recommended so it persists
+            }
+        }
+    }
+    // add item to inventory
+    func addItem(_ name: String) {
+        if let index = inventory.firstIndex(where: { $0.name == name }) {
+            inventory[index].amount += 1
+            save()   // keep data persistent
+        }
+    }
     //add user to firebase
     
     func addUser(){
         do{
             let _ = try db.collection("users").addDocument(data:[
                 "UUID" : currUUID.uuidString,
-                "friends" : friendsList,
                 "nickname" : currNickname,
+                "friends" : friendsList,
                 "recieve_potion" : hasRecievedPotion,
-                "sent_potion" : hasSentPotion
+                "sent_potion" : hasSentPotion,
             ])
         }
         catch{
@@ -80,10 +97,8 @@ class PlayerData: ObservableObject, Codable {
                     .getDocuments()
             
             for document in result.documents {
-                print("-------------------------")
                 print("\(document.documentID) => \(document.data())")
                 print(document.data()["UUID"]! as! String)
-                print("~~~~~~")
                 arr.append(document.data()["UUID"]! as! String)
                 arr.append(document.data()["nickname"]! as! String)
                 arr.append(document.data()["friends"]! as! [[String:Any]])
@@ -96,6 +111,31 @@ class PlayerData: ObservableObject, Codable {
         }
         
         return []
+    }
+    
+    func updateData(field: String, value: Any, uuid: String) {
+        let users = self.db.collection("users") //self.db points to *my* firestore
+            users.whereField("UUID", isEqualTo: uuid).limit(to: 1).getDocuments(completion: { querySnapshot, error in
+                if let err = error {
+                    print("error")
+                    return
+                }
+
+                guard let docs = querySnapshot?.documents else { return }
+
+                for doc in docs {
+                    let ref = doc.reference
+                    if(field == "friends"){
+                        ref.updateData([
+                            field : FieldValue.arrayUnion([value])
+                        ])
+                    }
+                    else{
+                        ref.updateData([field: value])
+                    }
+                }
+            })
+    
     }
 
     // Load data from file or create defaults
@@ -113,6 +153,7 @@ class PlayerData: ObservableObject, Codable {
             self.balance = 500
         }
     }
+    
 
     // Path for saving data to device
     static private var saveURL: URL {
