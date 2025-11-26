@@ -27,21 +27,29 @@ struct Home: View {
                     
                     // set total equal to the percentage of steps taken towards the goal.
                     LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
-//                    Text("Steps: \(Int(stepCountModel.steps))").foregroundStyle(.white)
-                    // Fight button is only active if the model allows it.
-                    if stepCountModel.isFinished() {
-                        NavigationLink("FIGHT!") {
-                            Fight(playerData).environmentObject(stepCountModel)
-                        }
-                    }
+
                     Spacer()
                     
-                    // Evil Wizard sprite
-                    SpriteView(scene: EvilWizardTauntScene(), options: [.allowsTransparency])
-                        .frame(width: UIScreen.screenWidth,
-                               height: UIScreen.screenHeight * (1/3),
-                               alignment: .bottom)
-                        .opacity(0.2 + stepCountModel.steps / stepCountModel.stepGoal)
+                    ZStack {
+                        // Evil Wizard sprite
+                        SpriteView(scene: EvilWizardTauntScene(), options: [.allowsTransparency])
+                            .frame(width: UIScreen.screenWidth,
+                                   height: UIScreen.screenHeight * (1/3),
+                                   alignment: .bottom)
+                            .opacity(0.2 + stepCountModel.steps / stepCountModel.stepGoal)
+                        
+                        // Fight button is only active if the model allows it.
+                        // Shows up on top of the evil wizard
+                        if stepCountModel.isFinished() {
+                            Spacer()
+                            NavigationLink("FIGHT") {
+                                Fight(playerData).environmentObject(stepCountModel)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .frame(alignment: .center)
+                        }
+                    }
+                    
                     
                     // Player and globe sprites
                     SpriteView(scene: PlayerWalkScene(), options: [.allowsTransparency])
@@ -104,7 +112,7 @@ struct LinearProgressView: View {
         VStack {
             ProgressView(value: (stepCountModel.steps > stepCountModel.stepGoal ? stepCountModel.stepGoal : stepCountModel.steps), total: stepCountModel.stepGoal)
                 .progressViewStyle(PurplePotionProgressViewStyle()).environmentObject(stepCountModel)
-            Button("More") {
+            Button("Debug: sync HK") {
                 Task{
                     await stepCountModel.debugSteps()
                 }
