@@ -7,35 +7,7 @@
 
 import SwiftUI
 
-extension UIDevice {
-    static let deviceDidShake = Notification.Name(rawValue: "deviceDidShake")
-}
 
-class CustomWindow: UIWindow {
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-            guard motion == .motionShake else { return }
-            NotificationCenter.default.post(name: UIDevice.deviceDidShake, object: nil)
-    }
-}
-
-extension View {
-    public func onShakeGesture(perform action: @escaping () -> Void) -> some View {
-        self.modifier(ShakeGestureViewModifier(action: action))
-    }
-}
-
-struct ShakeGestureViewModifier: ViewModifier {
-    // 1
-  let action: () -> Void
-  
-  func body(content: Content) -> some View {
-    content
-      // 2
-      .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShake)) { _ in
-        action()
-      }
-  }
-}
 struct Cauldren: View {
     @State private var droppedItems: [String] = []
     @State private var showMissingItemAlert = false
@@ -128,6 +100,7 @@ struct Cauldren: View {
             
             shakeCount = 0   // Reset for next brew
             showShakeCount = false
+            isBrewing = false
         }
     }
     func decreaseItemUsingEmoji(_ emoji: String) {
@@ -175,7 +148,7 @@ struct Cauldren: View {
                                             return
                                         }
 
-                                        // ✔ Safe to add
+                            
                                         droppedItems.append(item)
                                         decreaseItemUsingEmoji(item)
 
@@ -197,22 +170,6 @@ struct Cauldren: View {
                 .background(Color.white)
                 .cornerRadius(10)
                 
-            Text("")
-                .onShakeGesture{
-                    
-                    guard isBrewing else { return }   // ⬅ ONLY shake AFTER pressing Brew
-                    
-                    if droppedItems.count == 4 && checkRecipe(items: droppedItems) {
-                            shakeCount += 1
-                            showShakeCount = true
- 
-                            cauldronImage = (shakeCount % 2 == 0) ? "shaking_1" : "shaking_2"
-                            
-                            if shakeCount == 10 {
-                                brewPotion()
-                            }
-                        }
-                }
             HStack{
                 Button("Reset"){
                     reset_pot()
@@ -233,6 +190,8 @@ struct Cauldren: View {
                 Button("Brew"){
                     isBrewing = true
                     showShakeCount = true
+                    shakeCount = 0
+                    cauldronImage = "shaking_1"
                 }
                 .disabled(!checkRecipe(items: droppedItems))
                 .padding(7)
@@ -241,6 +200,21 @@ struct Cauldren: View {
                 .cornerRadius(10)
             }
             
+        }
+        .onShakeGesture{
+            
+            guard isBrewing else { return }   // ⬅ ONLY shake AFTER pressing Brew
+            
+            if droppedItems.count == 4 && checkRecipe(items: droppedItems) {
+                    shakeCount += 1
+                    showShakeCount = true
+
+                    cauldronImage = (shakeCount % 2 == 0) ? "shaking_1" : "shaking_2"
+                    
+                    if shakeCount == 10 {
+                        brewPotion()
+                    }
+                }
         }
         .padding()
         .background(
@@ -260,7 +234,7 @@ struct Cauldren: View {
                isPresented: $showPotionBrewedAlert) {
             Button("OK", role: .cancel){ }
         } message: {
-            Text("You have successfully brewed \(brewPotionType)! It is now in your inventory.")
+            Text("You have successfully brewed a \(brewPotionType) potion! It is now in your inventory.")
         }
     }
 }

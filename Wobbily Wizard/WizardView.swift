@@ -26,6 +26,7 @@ struct WizardView: View {
     @EnvironmentObject var playerData: PlayerData
     @EnvironmentObject var stepModel: StepCountViewModel
     
+    
     var body: some View {
         NavigationStack {
             VStack {
