@@ -27,7 +27,7 @@ struct Home: View {
                     
                     // set total equal to the percentage of steps taken towards the goal.
                     LinearProgressView().padding(8.0).frame(width: UIScreen.screenWidth, alignment: .top).environmentObject(stepCountModel)
-                    Text("Steps: \(Int(stepCountModel.steps))").foregroundStyle(.white)
+//                    Text("Steps: \(Int(stepCountModel.steps))").foregroundStyle(.white)
                     // Fight button is only active if the model allows it.
                     if stepCountModel.isFinished() {
                         NavigationLink("FIGHT!") {
@@ -60,6 +60,16 @@ struct Home: View {
                 .padding()
                 .frame(maxHeight:.infinity)
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .onChange(of: self.stepCountModel.steps) {
+            oldValue, newValue in
+            let newSteps = newValue - oldValue
+            if newSteps >= 0 {
+                // Only add gems if it would give more gems
+                self.playerData.balance += Int(newSteps)
+                print("added \(newSteps) gems")
+            }
+            
         }
     }
 }
@@ -141,4 +151,6 @@ extension Date {
 
 #Preview {
     Home()
+        .environmentObject(StepCountViewModel())
+        .environmentObject(PlayerData())
 }
