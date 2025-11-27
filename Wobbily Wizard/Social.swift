@@ -42,14 +42,28 @@ struct Friends: View{
                                         .padding(.leading, 10)
                                         .font(.largeTitle)
                                         .fontWeight(.semibold)
-                                    Button(action: {
-
-                                                print("potion sent!")
-                                            }) {
-                                                Label("", systemImage: "paperplane")
-                                            }
-                                            .offset(x: 120)
-                                            .font(.largeTitle)
+                                    VStack{
+                                        //Send Potion
+                                        Button(action: {
+                                            print("potion sent!")
+                                            playerData.updateData(field: "sent_potion", value: "randomID", uuid: playerData.currUUID.uuidString)
+                                        }) {
+                                            Label("", systemImage: "paperplane")
+                                        }
+                                        .offset(x: 120)
+                                        .font(.title)
+                                        .disabled(!(playerData.hasSentPotion.isEmpty))
+                                        
+                                        //Claim Potion
+                                        Button(action: {
+                                            print("potion recieved!")
+                                        }) {
+                                            Label("", systemImage: "tray.and.arrow.down")
+                                        }
+                                        .offset(x: 120)
+                                        .font(.title)
+                                        .disabled(playerData.hasRecievedPotion.isEmpty)
+                                    }
                                         
                                 }
                                 Text(i["uuid"]!)
