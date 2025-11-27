@@ -14,7 +14,6 @@ struct Friends: View{
     //Dict representing friendNickname: friendUUID
     @State private var listOfFriends: [[String: String]] = [["nickname" : " ", "uuid" : " "]]
     var body: some View{
-        //hardcoded array of UIDs, ideally backend would exist to store usernames and UIDs
         ZStack{
             Image("home_background").resizable().scaledToFill().ignoresSafeArea()
             VStack{
@@ -47,6 +46,8 @@ struct Friends: View{
                                         Button(action: {
                                             print("potion sent!")
                                             playerData.updateData(field: "sent_potion", value: i["uuid"]!, uuid: playerData.currUUID.uuidString)
+                                            playerData.hasSentPotion = i["uuid"]!
+                                            playerData.updateData(field: "recieve_potion", value: playerData.currUUID.uuidString, uuid: i["uuid"]!)
                                         }) {
                                             Label("", systemImage: "paperplane")
                                         }
@@ -57,12 +58,26 @@ struct Friends: View{
                                         //Claim Potion
                                         Button(action: {
                                             print("potion recieved!")
+                                            //At this point, hasRecievedPotion has the UUID of the friend who sent a potion
+                                            //INCREMENT FRIEND POTION HERE !!!!!!!!!!!!!!!!
+                                            playerData.hasRecievedPotion = ""
+                                            playerData.updateData(field: "recieve_potion", value: "", uuid: playerData.currUUID.uuidString)
+                                            playerData.updateData(field: "sent_potion", value: "", uuid: i["uuid"]!)
+                                            //INCREMENT RELATIONSHIP HERE
+                                            
                                         }) {
                                             Label("", systemImage: "tray.and.arrow.down")
                                         }
                                         .offset(x: 120)
                                         .font(.title)
-                                        .disabled(playerData.hasRecievedPotion.isEmpty)
+                                        .onAppear(){
+                                            Task{
+                                                var fetchingData = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                playerData.hasRecievedPotion = fetchingData[3] as! String
+                                            }
+                                        }
+                                        //disable button if hasRecievedPotion is empty and if one friend sent you a potion
+                                        .disabled(playerData.hasRecievedPotion.isEmpty || playerData.hasRecievedPotion != i["uuid"])
                                     }
                                         
                                 }
@@ -74,6 +89,7 @@ struct Friends: View{
                     }
                     
                 }
+
                 HStack{
                     TextField("Enter UUID here", text: $friendCode)
                         .foregroundColor(.white)
@@ -92,7 +108,7 @@ struct Friends: View{
                                 let friendUUID = fetchedData![0] as! String
                                 let friendNickname = fetchedData![1] as! String
                                 let temp = (["uuid" : friendUUID, "nickname" : friendNickname])
-                                //prevent repeat friends
+                                //prevent repeat friends / adding yourself
                                 var preventAppend = false
                                 for i in listOfFriends {
                                     if i["uuid"] == temp["uuid"] || temp["uuid"] == playerData.currUUID.uuidString {
@@ -101,9 +117,12 @@ struct Friends: View{
                                 }
                                 if (preventAppend == false){
                                     listOfFriends.append(temp)
+                                    //Add friend to user's friend list
+                                    playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "isSendingPotion" : false, "relationship" : 0], uuid: playerData.currUUID.uuidString)
+                                    //Add user to friend's friend list
+                                    playerData.updateData(field: "friends", value: ["friendUUID" : playerData.currUUID.uuidString, "friendName": playerData.currNickname, "isSendingPotion" : false, "relationship" : 0], uuid: friendCode)
+                                    friendCode = ""
                                 }
-                                playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "isSendingPotion" : false, "relationship" : 0], uuid: playerData.currUUID.uuidString)
-                                friendCode = ""
                                 
                             }
                         }
