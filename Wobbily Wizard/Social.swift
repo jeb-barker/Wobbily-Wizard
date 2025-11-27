@@ -46,7 +46,7 @@ struct Friends: View{
                                         //Send Potion
                                         Button(action: {
                                             print("potion sent!")
-                                            playerData.updateData(field: "sent_potion", value: "randomID", uuid: playerData.currUUID.uuidString)
+                                            playerData.updateData(field: "sent_potion", value: i["uuid"]!, uuid: playerData.currUUID.uuidString)
                                         }) {
                                             Label("", systemImage: "paperplane")
                                         }
