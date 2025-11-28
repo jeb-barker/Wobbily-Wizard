@@ -23,21 +23,21 @@ The Home screen is the main tab of the app.
 
 ### Cauldron
 The Cauldron screen is where the user goes to use the ingredients that they've purchased to brew potions.
-<br><img align="left" src="/screenshots/Home.png" width="200"> 
+<br><img align="left" src="/screenshots/Cauldron.png" width="200"> 
 A cauldron section is where you will be able to create your potions with your ingredients. The ingredients will be in a subview, and you will be able to scroll and then drag your ingredients into the cauldron. Once they are there, you will be able to shake your phone to mix them together. Right now, you are able to drag a set array of ingredients into the cauldron, and when you shake your phone, it alerts you that your phone has been shaken.
 
 <br clear="left"/>
 
 ### Shop
 The shop screen will be the spot where the player can purchase various components for crafting their potions. 
-<br><img align="left" src="/screenshots/Home.png" width="200"> 
+<br><img align="left" src="/screenshots/Shop.png" width="200"> 
 Currently, the shop functions are not fully finished but the background is set up and correctly sized for UI to be put in, and the next step is to set up how the items will be shown, how you can buy them, and how to keep track of things like player balance, which items are sold when, and how often the shop will refresh.
 
 <br clear="left"/>
 
 ### Friends
 The friends screen showcases friends that you can add. After submitting the UUID of your friend in the textfield at the bottom of the screen, it adds a rectangle that displays their nickname and UUID. 
-<br><img align="left" src="/screenshots/Home.png" width="200"> 
+<br><img align="left" src="/screenshots/Friends.png" width="200"> 
  There will be a button next to their name that will send them a potion that they can use in battle once a day. This will adjust the corresponding variables in firebase and allow them to use a friend potion. 
  <br> <br>
  Here's some friend codes you can try:
