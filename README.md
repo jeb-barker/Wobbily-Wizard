@@ -41,10 +41,10 @@ The friends screen showcases friends that you can add. After submitting the UUID
  There will be a button next to their name that will send them a potion that they can use in battle once a day. This will adjust the corresponding variables in firebase and allow them to use a friend potion. 
  <br> <br>
  Here's some friend codes you can try:
- - 95F832FD-01CF-432F-852B-240E14ACB3D2
- - 9F111118-67C3-4B5A-B2DF-860E9ED6F814
- - D7879E34-BB4D-41F7-84AE-507A0217CB45
- - 0A153E4B-4558-469E-B049-CE5FA7A55782
+ - 708CC979-3F12-4A86-B9B3-7DD543E02AC6
+ - CCB5E982-AB12-498E-BA3A-1664827DEE3A
+ - F25EFC19-6EA7-426F-85DE-44B9EB63ED0E
+ - 3184D3AD-3B51-4CD8-A2F3-3CCAEF3B6B85
 
 <br clear="left"/>
 
