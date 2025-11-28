@@ -56,6 +56,13 @@ struct Friends: View{
                                         }
                                         .offset(x: 120)
                                         .font(.title)
+                                        .onAppear(){
+                                            Task{
+                                                //
+                                                let fetchingData = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                playerData.hasSentPotion = fetchingData[4] as! String
+                                            }
+                                        }
                                         .disabled(!(playerData.hasSentPotion.isEmpty))
                                         
                                         //Claim Potion
