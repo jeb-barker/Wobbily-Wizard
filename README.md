@@ -38,7 +38,7 @@ Currently, the shop functions are not fully finished but the background is set u
 ### Friends
 The friends screen showcases friends that you can add. After submitting the UUID of your friend in the textfield at the bottom of the screen, it adds a rectangle that displays their nickname and UUID. 
 <br><img align="left" src="/screenshots/Friends.png" width="200"> 
- There will be a button next to their name that will send them a potion that they can use in battle once a day. This will adjust the corresponding variables in firebase and allow them to use a friend potion. 
+ Additionally, you can send potions to friends with the plane icon. When you press it, information is put into the firebase database, and allows the friend to claim the potion they were sent. Upon claiming the potion, their relationship increases, which increases the power of the potion if you continously send them to the same person. 
  <br> <br>
  Here's some friend codes you can try:
  - 708CC979-3F12-4A86-B9B3-7DD543E02AC6
