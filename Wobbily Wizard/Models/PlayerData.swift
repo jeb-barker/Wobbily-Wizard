@@ -113,7 +113,7 @@ class PlayerData: ObservableObject, Codable {
         return []
     }
     
-    func updateData(field: String, value: Any, uuid: String) {
+    func updateData(field: String, value: Any, uuid: String, addFriend: Bool) {
         let users = self.db.collection("users") //self.db points to *my* firestore
             users.whereField("UUID", isEqualTo: uuid).limit(to: 1).getDocuments(completion: { querySnapshot, error in
                 if let err = error {
@@ -125,7 +125,7 @@ class PlayerData: ObservableObject, Codable {
 
                 for doc in docs {
                     let ref = doc.reference
-                    if(field == "friends"){
+                    if(field == "friends" && addFriend == true){
                         ref.updateData([
                             field : FieldValue.arrayUnion([value])
                         ])

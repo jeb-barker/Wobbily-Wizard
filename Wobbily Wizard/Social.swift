@@ -10,7 +10,9 @@ import SwiftUI
 struct Friends: View{
     @EnvironmentObject var playerData: PlayerData
     @State private var friendCode: String = ""
-    @State private var fetchedData: [Any]? = nil
+    @State private var fetchedData: [Any]? = nil //for when adding a user
+    @State private var fetchUserFriends: [Any]? = nil // for when incrementing relationship on user end
+    @State private var fetchFriends: [Any]? = nil //for when incrementing relationship on friend end
     //Dict representing friendNickname: friendUUID
     @State private var listOfFriends: [[String: String]] = [["nickname" : " ", "uuid" : " "]]
     var body: some View{
@@ -27,6 +29,7 @@ struct Friends: View{
                     .foregroundColor(.white)
                 //Text(playerData.documentId)
                     .textSelection(.enabled)
+                //Use for each loop to create a scrollview of users
                 ScrollView{
                     ForEach(listOfFriends.dropFirst(), id: \.self){ i in
                         ZStack{
@@ -45,9 +48,9 @@ struct Friends: View{
                                         //Send Potion
                                         Button(action: {
                                             print("potion sent!")
-                                            playerData.updateData(field: "sent_potion", value: i["uuid"]!, uuid: playerData.currUUID.uuidString)
+                                            playerData.updateData(field: "sent_potion", value: i["uuid"]!, uuid: playerData.currUUID.uuidString, addFriend: false)
                                             playerData.hasSentPotion = i["uuid"]!
-                                            playerData.updateData(field: "recieve_potion", value: playerData.currUUID.uuidString, uuid: i["uuid"]!)
+                                            playerData.updateData(field: "recieve_potion", value: playerData.currUUID.uuidString, uuid: i["uuid"]!, addFriend: false)
                                         }) {
                                             Label("", systemImage: "paperplane")
                                         }
@@ -61,9 +64,42 @@ struct Friends: View{
                                             //At this point, hasRecievedPotion has the UUID of the friend who sent a potion
                                             //INCREMENT FRIEND POTION HERE !!!!!!!!!!!!!!!!
                                             playerData.hasRecievedPotion = ""
-                                            playerData.updateData(field: "recieve_potion", value: "", uuid: playerData.currUUID.uuidString)
-                                            playerData.updateData(field: "sent_potion", value: "", uuid: i["uuid"]!)
-                                            //INCREMENT RELATIONSHIP HERE
+                                            playerData.updateData(field: "recieve_potion", value: "", uuid: playerData.currUUID.uuidString, addFriend: false)
+                                            playerData.updateData(field: "sent_potion", value: "", uuid: i["uuid"]!, addFriend: false)
+                                            //Increment relationship for both user and friend
+                                            Task{
+                                                //increment on the user's end
+                                                fetchUserFriends = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                if !(fetchUserFriends!.isEmpty){
+                                                    var fetchedFriendList = fetchUserFriends![2] as! [[String: Any]]
+                                                    for j in 0...fetchedFriendList.count - 1{
+                                                        if(j != 0){
+                                                            if(fetchedFriendList[j]["friendUUID"]! as! String == i["uuid"]){
+                                                                var x = fetchedFriendList[j]["relationship"]! as! Int
+                                                                x += 10
+                                                                fetchedFriendList[j]["relationship"] = x
+                                                            }
+                                                        }
+                                                    }
+                                                    playerData.updateData(field: "friends", value: fetchedFriendList, uuid: playerData.currUUID.uuidString, addFriend: false)
+                                                }
+                                                //increment on the friend's end
+                                                fetchFriends = await playerData.fetchDataWithField(field: "UUID", value: i["uuid"]!)
+                                                if !(fetchFriends!.isEmpty){
+                                                    var fetchedFriendList = fetchFriends![2] as! [[String: Any]]
+                                                    for j in 0...fetchedFriendList.count - 1{
+                                                        if(j != 0){
+                                                            if(fetchedFriendList[j]["friendUUID"]! as! String == playerData.currUUID.uuidString){
+                                                                var x = fetchedFriendList[j]["relationship"]! as! Int
+                                                                x += 10
+                                                                fetchedFriendList[j]["relationship"] = x
+                                                            }
+                                                        }
+                                                    }
+                                                    playerData.updateData(field: "friends", value: fetchedFriendList, uuid: i["uuid"]!, addFriend: false)
+                                                    
+                                                }
+                                            }
                                             
                                         }) {
                                             Label("", systemImage: "tray.and.arrow.down")
@@ -72,7 +108,8 @@ struct Friends: View{
                                         .font(.title)
                                         .onAppear(){
                                             Task{
-                                                var fetchingData = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                //
+                                                let fetchingData = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
                                                 playerData.hasRecievedPotion = fetchingData[3] as! String
                                             }
                                         }
@@ -89,7 +126,7 @@ struct Friends: View{
                     }
                     
                 }
-
+                //friend search button
                 HStack{
                     TextField("Enter UUID here", text: $friendCode)
                         .foregroundColor(.white)
@@ -118,9 +155,9 @@ struct Friends: View{
                                 if (preventAppend == false){
                                     listOfFriends.append(temp)
                                     //Add friend to user's friend list
-                                    playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "isSendingPotion" : false, "relationship" : 0], uuid: playerData.currUUID.uuidString)
+                                    playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "relationship" : 0], uuid: playerData.currUUID.uuidString, addFriend: true)
                                     //Add user to friend's friend list
-                                    playerData.updateData(field: "friends", value: ["friendUUID" : playerData.currUUID.uuidString, "friendName": playerData.currNickname, "isSendingPotion" : false, "relationship" : 0], uuid: friendCode)
+                                    playerData.updateData(field: "friends", value: ["friendUUID" : playerData.currUUID.uuidString, "friendName": playerData.currNickname, "relationship" : 0], uuid: friendCode, addFriend: true)
                                     friendCode = ""
                                 }
                                 
