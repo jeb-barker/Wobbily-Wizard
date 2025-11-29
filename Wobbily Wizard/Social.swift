@@ -76,7 +76,7 @@ struct Friends: View{
                                             //Increment relationship for both user and friend
                                             Task{
                                                 //increment on the user's end
-                                                //fetchUserFriends = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                fetchUserFriends = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
                                                 if !(fetchUserFriends!.isEmpty){
                                                     var fetchedFriendList = fetchUserFriends![2] as! [[String: Any]]
                                                     for j in 0...fetchedFriendList.count - 1{
