@@ -48,6 +48,21 @@ The friends screen showcases friends that you can add. After submitting the UUID
 
 <br clear="left"/>
 
+### Fight
+The Fight screen is where you battle with the evil wizard. You have 10 turns to attack the evil wizard, using a potion each turn.
+<br><img align="left" src="/screenshots/Fight.png" width="200"> 
+- Each turn, the evil wizard is weak to a different type of potion, and using the correct one will deal double damage.
+- Each turn the player can either pass or choose a potion (if one is available)
+- Upon choosing a potion, the evil wizard's crystal ball will show a series of numbers.
+  - The player should draw a line on their summoning circle (the black area) in the order of numbers that shows in the crystal ball
+  - If the player draws correctly, they will do full damage
+  - If the player draws incorrectly, they will do half damage
+  - The player has five seconds to draw the shape
+- After the fight, the player can press the back button to go back to the Home screen
+- If the player wins, the step goal will increase by 20%, otherwise it will stay the same. Either way, the player will have to walk at least 300 more steps if they want to fight the evil wizard again.
+
+<br clear="left"/>
+
 
 ## Technical Details
 ### Backend
