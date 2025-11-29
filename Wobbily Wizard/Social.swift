@@ -69,7 +69,7 @@ struct Friends: View{
                                         Button(action: {
                                             print("potion recieved!")
                                             //At this point, hasRecievedPotion has the UUID of the friend who sent a potion
-                                            //INCREMENT FRIEND POTION HERE !!!!!!!!!!!!!!!!
+                                            playerData.hasFriendPotion = true
                                             playerData.hasRecievedPotion = ""
                                             playerData.updateData(field: "recieve_potion", value: "", uuid: playerData.currUUID.uuidString, addFriend: false)
                                             playerData.updateData(field: "sent_potion", value: "", uuid: i["uuid"]!, addFriend: false)
