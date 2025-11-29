@@ -24,7 +24,12 @@ The Home screen is the main tab of the app.
 ### Cauldron
 The Cauldron screen is where the user goes to use the ingredients that they've purchased to brew potions.
 <br><img align="left" src="/screenshots/Cauldron.png" width="200"> 
-A cauldron section is where you will be able to create your potions with your ingredients. The ingredients will be in a subview, and you will be able to scroll and then drag your ingredients into the cauldron. Once they are there, you will be able to shake your phone to mix them together. Right now, you are able to drag a set array of ingredients into the cauldron, and when you shake your phone, it alerts you that your phone has been shaken.
+Brewing potions is done by dragging ingredients into the cauldron, and shaking you phone a certain amount of times. When you open this page, you are met with the ingredients that you have in your inventory displayed at the top of your screen. If you do not have a certain item, it will not appear as an available ingredient. If you have more than one ingredient, then only one will appear, since for each recipe you only need one of a certain item. From those displayed items, you drag them one by one into the cauldron. The ones in the cauldron will apear in an array displayed below the cauldron. If you try and drag a duplicate of an item, it will alert you and tell you that this action is not allowed. If at any point you want to empty your cauldron, you can click the "reset" button, which will clear the cauldron and put the items back into the player's inventory. In order to click the "brew" button, you must have one of these recipes in the cauldron:
+-🌻(sunflower), 🌶️(hot pepper), 🌡️(thermometer), 🧨(fire cracker) = fire potion
+-🔌(cable), 🔋(battery), ⚡(lightning), 📱(device) - electric potion
+-🐍(snake), 🧪(vile), 💀(skull), ☢️(nuclear waste) - poison potion
+-🧊(ice cube), 🍨(ice cream), 🥶(frozen fred), 🐧(penguin) - ice potion
+Once you do, you can click "brew" and a different cauldron image will appear. There will be a now bubbling cauldron, and a shake counter below it. You must shake the phone 10 times to brew the potion of your choosing. With every shake, the bubbles will change. Once you have shaken the phone the right amount, there will be an alert that you now have a brewed potion, that potion goes to your potion inventory to be used in the fight screen, and you can now start again with brewing your next potion. All of this is directly connected to the environment object PlayerData, which allows for direct inventory deleting and adding when you put things in and out of the cauldron.
 
 <br clear="left"/>
 
