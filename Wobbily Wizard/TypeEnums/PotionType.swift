@@ -17,7 +17,7 @@ enum PotionType: Int, CustomStringConvertible, Codable {
         case .red:
             return Color.red
         case .purple:
-            return Color.purple //TODO: change this to an icy color
+            return Color.cyan
         case .green:
             return Color.green
         case .yellow:

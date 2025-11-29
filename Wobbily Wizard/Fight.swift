@@ -179,8 +179,10 @@ struct PotionBarView: View {
                 } label: {
                     ZStack {
                         Image("potion_\(potion.potionType.rawString)")
+                            .renderingMode(.template)
                                 .frame(width: UIScreen.screenWidth / 6)
                                 .scaleEffect(2)
+                                .foregroundStyle(potion.potionType.color)
                                 .padding(8)
                         
                         Text("x\(potion.amount)")

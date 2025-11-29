@@ -144,6 +144,7 @@ class PlayerData: ObservableObject, Codable {
             self.inventory = saved.inventory
             self.potions = saved.potions
             self.balance = saved.balance
+            self.hasSeenLanding = saved.hasSeenLanding
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
             self.inventory = [
