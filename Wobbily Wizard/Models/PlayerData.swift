@@ -33,10 +33,11 @@ class PlayerData: ObservableObject, Codable {
     @Published var hasSentPotion: String = ""
     @Published var documentId: String = ""
     @Published var hasFriendPotion : Bool = false
+    @Published var listOfFriends: [[String: String]] = [["nickname" : " ", "uuid" : " "]]
     
 
     enum CodingKeys: String, CodingKey {
-        case inventory, potions, balance, hasSeenLanding, currUUID, currNickname
+        case inventory, potions, balance, hasSeenLanding, currUUID, currNickname, listOfFriends
     }
 
     // Try and load saved data
@@ -48,6 +49,7 @@ class PlayerData: ObservableObject, Codable {
         hasSeenLanding = try container.decode(Bool.self, forKey: .hasSeenLanding)
         currUUID = try container.decode(UUID.self, forKey: .currUUID)
         currNickname = try container.decode(String.self, forKey: .currNickname)
+        listOfFriends = try container.decode([[String:String]].self, forKey: .listOfFriends)
     }
 
     // Encode data to be saved
@@ -59,6 +61,7 @@ class PlayerData: ObservableObject, Codable {
         try container.encode(hasSeenLanding, forKey: .hasSeenLanding)
         try container.encode(currUUID, forKey: .currUUID)
         try container.encode(currNickname, forKey: .currNickname)
+        try container.encode(listOfFriends, forKey: .listOfFriends)
     }
     
     private var db = Firestore.firestore()
@@ -154,6 +157,7 @@ class PlayerData: ObservableObject, Codable {
             self.hasSeenLanding = saved.hasSeenLanding
             self.currUUID = saved.currUUID
             self.currNickname = saved.currNickname
+            self.listOfFriends = saved.listOfFriends
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
             self.inventory = [
