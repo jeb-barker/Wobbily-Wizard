@@ -79,37 +79,65 @@ struct Fight: View {
                     .frame(width: UIScreen.screenWidth,
                        alignment: .bottom)
                     .background(Color.brown)
-                //Evil Wizard
-                SpriteView(scene: tauntScene, options: [.allowsTransparency])
-                    .frame(width: UIScreen.screenWidth,
-                           height: UIScreen.screenHeight * (1/3),
-                           alignment: .bottom)
-                Divider()
-                //Temp
-                
                 ZStack {
-                    //Fight Scene
-                    SpriteView(scene: FightScreenScene(fightModel: fightModel, size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight/3)), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
+                    //Background
+                    Image("home_background")
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                    
                     VStack {
-                        HStack {
-                            Spacer()
-                            Button("Pass") {
-                                self.fightModel.endTurn()
+                        Spacer()
+                        //Evil Wizard
+                        SpriteView(scene: tauntScene, options: [.allowsTransparency])
+                            .frame(width: UIScreen.screenWidth,
+                                   height: UIScreen.screenHeight * (1/3),
+                                   alignment: .bottom)
+                            .scaledToFit()
+                        Divider()
+                        //Temp
+                        
+                        ZStack {
+                            //Fight Scene
+                            SpriteView(scene: FightScreenScene(fightModel: fightModel, size: CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight/3)), options: [.allowsTransparency,]).ignoresSafeArea().border(.black)
+                                .scaledToFit()
+                            
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Button("Pass") {
+                                        self.fightModel.endTurn()
+                                    }
+                                    .frame(alignment: .bottom)
+                                    .padding(10)
+                                    .buttonStyle(.borderedProminent)
+                                    .offset(x: -UIScreen.screenWidth / 5)
+                                    
+                                    //Friend Button
+                                    Button("Friend Potion", systemImage: "flask") {
+                                        self.fightModel.useFriendPotion()
+                                    }
+                                    .labelStyle(.iconOnly)
+                                    .frame(alignment: .bottom)
+                                    .padding(10)
+                                    .buttonStyle(.borderedProminent)
+                                    .opacity(self.fightModel.isUsingFriendPotion ? 0.5 : 1)
+                                    .offset(x: UIScreen.screenWidth / 5)
+                                    .disabled(!self.playerData.hasFriendPotion)
+                                    Spacer()
+                                }
+                                .padding(10)
+                                
+                                Spacer()
                             }
-                            .frame(alignment: .bottom)
-                            .padding(10)
-                            .buttonStyle(.borderedProminent)
                             
                         }
-                        .padding(10)
-                        Spacer()
+                        .frame(maxWidth: .infinity)
+                        .background(self.fightModel.currentSelectedPotionType?.color ?? .gray)
                     }
-                    
                     
                 }
                 
-                
-                Spacer()
                 //Potion Bar
                 PotionBarView()
                     .environmentObject(fightModel)
@@ -179,10 +207,8 @@ struct PotionBarView: View {
                 } label: {
                     ZStack {
                         Image("potion_\(potion.potionType.rawString)")
-                            .renderingMode(.template)
                                 .frame(width: UIScreen.screenWidth / 6)
                                 .scaleEffect(2)
-                                .foregroundStyle(potion.potionType.color)
                                 .padding(8)
                         
                         Text("x\(potion.amount)")

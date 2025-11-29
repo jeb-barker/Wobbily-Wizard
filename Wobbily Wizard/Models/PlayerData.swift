@@ -32,10 +32,11 @@ class PlayerData: ObservableObject, Codable {
     //String of UUID of the person its sent to
     @Published var hasSentPotion: String = ""
     @Published var documentId: String = ""
+    @Published var hasFriendPotion : Bool = false
     
 
     enum CodingKeys: String, CodingKey {
-        case inventory, potions, balance
+        case inventory, potions, balance, hasSeenLanding, currUUID, currNickname
     }
 
     // Try and load saved data
@@ -44,6 +45,9 @@ class PlayerData: ObservableObject, Codable {
         inventory = try container.decode([InventoryItem].self, forKey: .inventory)
         potions = try container.decode([InventoryPotion].self, forKey: .potions)
         balance = try container.decode(Int.self, forKey: .balance)
+        hasSeenLanding = try container.decode(Bool.self, forKey: .hasSeenLanding)
+        currUUID = try container.decode(UUID.self, forKey: .currUUID)
+        currNickname = try container.decode(String.self, forKey: .currNickname)
     }
 
     // Encode data to be saved
@@ -52,6 +56,9 @@ class PlayerData: ObservableObject, Codable {
         try container.encode(inventory, forKey: .inventory)
         try container.encode(potions, forKey: .potions)
         try container.encode(balance, forKey: .balance)
+        try container.encode(hasSeenLanding, forKey: .hasSeenLanding)
+        try container.encode(currUUID, forKey: .currUUID)
+        try container.encode(currNickname, forKey: .currNickname)
     }
     
     private var db = Firestore.firestore()
@@ -145,12 +152,14 @@ class PlayerData: ObservableObject, Codable {
             self.potions = saved.potions
             self.balance = saved.balance
             self.hasSeenLanding = saved.hasSeenLanding
+            self.currUUID = saved.currUUID
+            self.currNickname = saved.currNickname
         } else {
             // Default data: Player starts with 500 gems, enough ingredients to make 3 fire potions, and has 2 ice potions
             self.inventory = [
                 InventoryItem("Sunflower", 3), InventoryItem("Hot Pepper", 3), InventoryItem("Thermometer", 3), InventoryItem("Fire Cracker", 3), InventoryItem("Cable", 0), InventoryItem("Battery", 0), InventoryItem("Lightning", 0), InventoryItem("Device", 0), InventoryItem("Snake", 0), InventoryItem("Vial", 0), InventoryItem("Skull", 0), InventoryItem("Nuclear Waste", 0), InventoryItem("Ice Cube", 0), InventoryItem("Ice Cream", 0), InventoryItem("Frozen Fred", 0), InventoryItem("Penguin", 0)
             ]
-            self.potions = [InventoryPotion("fire", 1), InventoryPotion("electric", 4), InventoryPotion("poison", 0), InventoryPotion("ice", 2)]
+            self.potions = [InventoryPotion("fire", 1), InventoryPotion("electric", 1), InventoryPotion("poison", 1), InventoryPotion("ice", 1)]
             self.balance = 500
         }
     }

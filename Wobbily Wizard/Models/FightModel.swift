@@ -25,6 +25,8 @@ final class FightModel: ObservableObject {
     // Player inventory and potions
     private var playerData : PlayerData
     @Published var currentSelectedPotionType : PotionType? = nil
+    private var friendPotionModifier = 1.0
+    @Published var isUsingFriendPotion = false
     
     //Casting
     private var spellTimer : Timer?
@@ -70,6 +72,11 @@ final class FightModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func useFriendPotion() {
+        self.friendPotionModifier = 1.2 // 20% extra damage
+        isUsingFriendPotion = true
     }
     
     func endTurn() {
@@ -122,16 +129,28 @@ final class FightModel: ObservableObject {
         //only allow if currently casting
         if isCasting {
             if candles.count == self.enemyShape?.count {
-                damage = 20
+                damage = 10
                 for (index, candle) in candles.enumerated() {
                     if candle != self.enemyShape?[index] {
-                        damage = 10
+                        damage = 5
                     }
                 }
                 
                 // Do potion damage
                 if currentSelectedPotionType == enemyWeakness {
                     damage *= 2
+                }
+                
+                // Friend Modifier
+                if self.playerData.hasRecievedPotion != "" {
+                    // TODO: increase friend bond?
+                    // modify damage
+                    damage = Int(Double(damage) * self.friendPotionModifier)
+                    // remove friend potion from the inventory
+                    self.playerData.hasRecievedPotion = ""
+                    self.playerData.hasFriendPotion = false
+                    isUsingFriendPotion = false
+                    print("friend damage")
                 }
                 enemyHealth -= Double(damage)
             }

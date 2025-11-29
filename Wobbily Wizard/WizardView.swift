@@ -67,6 +67,7 @@ struct WizardView: View {
             
         }.onDisappear() {
             stepModel.save()
+            playerData.save()
         }
     }
 }
