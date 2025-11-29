@@ -30,8 +30,8 @@ A cauldron section is where you will be able to create your potions with your in
 
 ### Shop
 The shop screen will be the spot where the player can purchase various components for crafting their potions. 
-<br><img align="left" src="/screenshots/Shop.png" width="200"> 
-Currently, the shop functions are not fully finished but the background is set up and correctly sized for UI to be put in, and the next step is to set up how the items will be shown, how you can buy them, and how to keep track of things like player balance, which items are sold when, and how often the shop will refresh.
+<br><img align="left" src="/screenshots/Shop.png" width="200"><br>
+To use the shop screen, the user must tap of the icon of the item that they would like to purchase. Each item has the cost in gems that it is worth on the right side of the book, and in order for the users purchase to go through the program checks that they have enough gems to buy it, which is displayed in the top left corner of the screen. Once the item is bought, the item is put into the users inventory. The items in the inventory change every 36 seconds currently (36 is just a test amount, gotten from 3600 seconds which is an hour), and it is set to not have more than one of the same item displayed at the same time.
 
 <br clear="left"/>
 
