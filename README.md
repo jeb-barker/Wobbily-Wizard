@@ -60,6 +60,8 @@ The Fight screen is where you battle with the evil wizard. You have 10 turns to 
   - The player has five seconds to draw the shape
 - After the fight, the player can press the back button to go back to the Home screen
 - If the player wins, the step goal will increase by 20%, otherwise it will stay the same. Either way, the player will have to walk at least 300 more steps if they want to fight the evil wizard again.
+- The player can press the friend potion button (next to the pass button) if they have claimed one from one of their friends
+  - The friend potion gives an extra 20% damage on the attack made after its use.
 
 <br clear="left"/>
 
