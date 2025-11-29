@@ -14,7 +14,7 @@ struct Friends: View{
     @State private var fetchUserFriends: [Any]? = nil // for when incrementing relationship on user end
     @State private var fetchFriends: [Any]? = nil //for when incrementing relationship on friend end
     //Dict representing friendNickname: friendUUID
-    @State private var listOfFriends: [[String: String]] = [["nickname" : " ", "uuid" : " "]]
+    //@State private var listOfFriends: [[String: String]] = [["nickname" : " ", "uuid" : " "]]
     var body: some View{
         ZStack{
             Image("home_background").resizable().scaledToFill().ignoresSafeArea()
@@ -31,7 +31,7 @@ struct Friends: View{
                     .textSelection(.enabled)
                 //Use for each loop to create a scrollview of users
                 ScrollView{
-                    ForEach(listOfFriends.dropFirst(), id: \.self){ i in
+                    ForEach(playerData.listOfFriends.dropFirst(), id: \.self){ i in
                         ZStack{
                             RoundedRectangle(cornerRadius: 25)
                                 .fill(.indigo)
@@ -69,14 +69,14 @@ struct Friends: View{
                                         Button(action: {
                                             print("potion recieved!")
                                             //At this point, hasRecievedPotion has the UUID of the friend who sent a potion
-                                            playerData.hasFriendPotion = true
+                                            //INCREMENT FRIEND POTION HERE !!!!!!!!!!!!!!!!
                                             playerData.hasRecievedPotion = ""
                                             playerData.updateData(field: "recieve_potion", value: "", uuid: playerData.currUUID.uuidString, addFriend: false)
                                             playerData.updateData(field: "sent_potion", value: "", uuid: i["uuid"]!, addFriend: false)
                                             //Increment relationship for both user and friend
                                             Task{
                                                 //increment on the user's end
-                                                fetchUserFriends = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
+                                                //fetchUserFriends = await playerData.fetchDataWithField(field: "UUID", value: playerData.currUUID.uuidString)
                                                 if !(fetchUserFriends!.isEmpty){
                                                     var fetchedFriendList = fetchUserFriends![2] as! [[String: Any]]
                                                     for j in 0...fetchedFriendList.count - 1{
@@ -154,18 +154,19 @@ struct Friends: View{
                                 let temp = (["uuid" : friendUUID, "nickname" : friendNickname])
                                 //prevent repeat friends / adding yourself
                                 var preventAppend = false
-                                for i in listOfFriends {
+                                for i in playerData.listOfFriends {
                                     if i["uuid"] == temp["uuid"] || temp["uuid"] == playerData.currUUID.uuidString {
                                         preventAppend = true
                                     }
                                 }
                                 if (preventAppend == false){
-                                    listOfFriends.append(temp)
+                                    playerData.listOfFriends.append(temp)
                                     //Add friend to user's friend list
                                     playerData.updateData(field: "friends", value: ["friendUUID" : friendCode, "friendName": fetchedData![1], "relationship" : 0], uuid: playerData.currUUID.uuidString, addFriend: true)
                                     //Add user to friend's friend list
                                     playerData.updateData(field: "friends", value: ["friendUUID" : playerData.currUUID.uuidString, "friendName": playerData.currNickname, "relationship" : 0], uuid: friendCode, addFriend: true)
                                     friendCode = ""
+                                    playerData.save()
                                 }
                                 
                             }
